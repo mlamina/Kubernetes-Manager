@@ -1,5 +1,8 @@
 <div class="panel panel-default">
-  <div class="panel-heading"><b>{{ services.length }} Services</b></div>
+  <div class="panel-heading">
+    <b>{{ services.length }} Services</b>
+    <i class="fa fa-refresh fa-spin fa-lg" ng-if="loading"></i>
+  </div>
   <table class="table table-striped">
     <tr ng-repeat="svc in services">
       <td>{{svc.metadata.name}}</td>

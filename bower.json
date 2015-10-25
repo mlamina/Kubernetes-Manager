@@ -14,5 +14,8 @@
     "angular-mocks": "~1.4.5",
     "angular-bootstrap": "~0.14.3",
     "html5-boilerplate": "~5.2.0"
+  },
+  "devDependencies": {
+    "components-font-awesome": "~4.4.0"
   }
 }

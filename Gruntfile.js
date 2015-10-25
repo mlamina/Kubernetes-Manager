@@ -31,7 +31,7 @@ module.exports = function(grunt) {
             cwd: 'app',
             src: [
               'assets/**',
-              'bower_components/**',
+              'bower_components/**/*.{js,css}',
               'components/**',
               'app.*', 'index.html'
             ],

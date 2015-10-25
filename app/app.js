@@ -66,7 +66,23 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
             return Events.queryAll();
           }
         }
-      })
-      ;
+      });
 
-}]);
+}])
+  .controller('AutoReloadController', ['$rootScope', '$scope', '$interval', function($rootScope, $scope, $interval) {
+    $scope.autoReloadActivated = true;
+    var autoReload;
+    function setAutoReloadInterval() {
+      if ($scope.autoReloadActivated) {
+        autoReload = $interval(function(){
+          $rootScope.$broadcast('auto-reload');
+        }, 2000);
+      } else
+        $interval.cancel(autoReload);
+    }
+    $scope.toggleAutoReload = function() {
+      $scope.autoReloadActivated = !$scope.autoReloadActivated;
+      setAutoReloadInterval();
+    };
+    setAutoReloadInterval();
+   }]);

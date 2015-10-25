@@ -2,19 +2,28 @@
 
 angular.module('k8s-manager.overview', ['ui.bootstrap', 'k8s-manager.api', 'k8s-manager.modals', 'ui.router'])
 
-  .controller('ServiceResourceController', ['$scope','namespaceServices',
-    function($scope, namespaceServices) {
+  .controller('ServiceResourceController', ['$scope','namespaceServices', 'Services', '$stateParams',
+    function($scope, namespaceServices, Services, $stateParams) {
       $scope.services = namespaceServices;
+      function reloadData() {
+        Services.byNamespace($stateParams.namespace).then(function(services) {
+          $scope.services = services;
+        });
+      }
+      $scope.$on('pods-changed', reloadData);
+      $scope.$on('auto-reload', reloadData);
     }])
 
-  .controller('RcResourceController', ['$scope','namespaceReplicationControllers', 'ReplicationControllers',
-    function($scope, namespaceReplicationControllers, ReplicationControllers) {
+  .controller('RcResourceController', ['$scope','namespaceReplicationControllers', 'ReplicationControllers', '$stateParams',
+    function($scope, namespaceReplicationControllers, ReplicationControllers, $stateParams) {
       $scope.rcs = namespaceReplicationControllers;
-      $scope.$on('pods-changed', function(event, args) {
+      function reloadData() {
         ReplicationControllers.byNamespace($stateParams.namespace).then(function(rcs) {
           $scope.rcs = rcs;
         });
-      });
+      }
+      $scope.$on('pods-changed', reloadData);
+      $scope.$on('auto-reload', reloadData);
     }])
 
   .controller('PodsResourceController', ['$scope', '$uibModal', 'namespacePods', 'Modals', '$stateParams', 'Pods',
@@ -23,11 +32,13 @@ angular.module('k8s-manager.overview', ['ui.bootstrap', 'k8s-manager.api', 'k8s-
       $scope.openModal = function(pod) {
         Modals.openPodModal($stateParams.namespace, pod.metadata.name);
       };
-      $scope.$on('pods-changed', function(event, args) {
+      function reloadData() {
         Pods.byNamespace($stateParams.namespace).then(function(pods) {
           $scope.pods = pods;
         });
-      });
+      }
+      $scope.$on('pods-changed', reloadData);
+      $scope.$on('auto-reload', reloadData);
   }])
 
   .controller('DashboardMenuCtrl', ['$scope', '$stateParams', 'namespaces', 'quotas',
