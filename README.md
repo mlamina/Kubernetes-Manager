@@ -7,6 +7,19 @@ This project is a browser-based interface to the [Kubernetes](http://kubernetes.
 to provide most of the functionality of the `kubectl.sh` command-line tool. Additionally, it should give
 you a quick overview of the health status of your Kubernetes cluster.
 
+## Screenshots
+
+### Dashboard
+
+![Dashboard](screenshots/dashboard.png)
+
+### Events
+
+![List of cluster events](screenshots/events.png)
+
+### Pod Details
+
+![Modal with pod details](screenshots/pod_detail.png)
 
 ## Installation
 
