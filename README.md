@@ -3,19 +3,19 @@ in any way.
 
 # Kubernetes Manager
 
-This project is a browser-based interface to the [http://kubernetes.io/](Kubernetes) API. The idea is
+This project is a browser-based interface to the [Kubernetes](http://kubernetes.io/) API. The idea is
 to provide most of the functionality of the `kubectl.sh` command-line tool. Additionally, it should give
 you a quick overview of the health status of your Kubernetes cluster.
 
 
 ## Installation
 
-Kubernetes Manager is meant to be run as a
-[https://github.com/kubernetes/kubernetes/tree/master/cluster/addons](Cluster Addon).
+Kubernetes Manager is meant to be run as a Kubernetes
+[Cluster Addon](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons).
 
 ### Prerequisites
 
-You need a running Kubernetes cluster. See [http://kubernetes.io/](http://kubernetes.io/) for details.
+You need a running Kubernetes cluster. See [kubernetes.io](http://kubernetes.io/) for details.
 
 ### Copy the .yml files to your Kubernetes Master
  
@@ -30,5 +30,5 @@ to your Kubernetes Manager here:
 
 ## Development
 
-Kubernetes Manager is built using [https://angularjs.org/](AngularJS). Please feel free to fork this repository,
+Kubernetes Manager is built using [AngularJS](https://angularjs.org/). Please feel free to fork this repository,
 ask me questions or submit pull requests!
