@@ -7,13 +7,18 @@ angular.module('k8s-manager.overview', ['ui.bootstrap', 'k8s-manager.api', 'k8s-
       $scope.services = namespaceServices;
     }])
 
-  .controller('RcResourceController', ['$scope','namespaceReplicationControllers',
-    function($scope, namespaceReplicationControllers) {
+  .controller('RcResourceController', ['$scope','namespaceReplicationControllers', 'ReplicationControllers',
+    function($scope, namespaceReplicationControllers, ReplicationControllers) {
       $scope.rcs = namespaceReplicationControllers;
+      $scope.$on('pods-changed', function(event, args) {
+        ReplicationControllers.byNamespace($stateParams.namespace).then(function(rcs) {
+          $scope.rcs = rcs;
+        });
+      });
     }])
 
   .controller('PodsResourceController', ['$scope', '$uibModal', 'namespacePods', 'Modals', '$stateParams', 'Pods',
-    function($scope, $uibModal, namespacePods, Modals, $stateParams) {
+    function($scope, $uibModal, namespacePods, Modals, $stateParams, Pods) {
       $scope.pods = namespacePods;
       $scope.openModal = function(pod) {
         Modals.openPodModal($stateParams.namespace, pod.metadata.name);
