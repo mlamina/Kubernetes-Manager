@@ -1,0 +1,29 @@
+<div class="panel panel-default">
+  <div class="panel-heading"><b>{{ rcs.length }} Replication Controllers</b></div>
+  <table class="table table-striped"  >
+    <thead>
+    <th>Name</th>
+    <th>Replications</th>
+    </thead>
+    <tbody>
+    <tr ng-repeat="rc in rcs">
+      <td>{{rc.metadata.name}}</td>
+      <!--<td><span ng-repeat="(key,value) in rc.metadata.labels" class="label label-info">{{key}}:{{value}}</span> </td>-->
+      <td>
+        <div class="progress" style="margin-bottom: 0 !important;">
+          <div class="progress-bar"
+               role="progressbar"
+               aria-valuenow="60"
+               aria-valuemin="0"
+               aria-valuemax="100"
+               style="width: {{(rc.status.replicas / rc.spec.replicas) * 100}}%; min-width: 3em;"
+               ng-class="{ 'progress-bar-warning': (rc.status.replicas < rc.spec.replicas && rc.status.replicas > 0), 'progress-bar-danger': (rc.status.replicas == 0), 'progress-bar-success': (rc.status.replicas == rc.spec.replicas) }">
+            {{rc.status.replicas}} / {{rc.spec.replicas}}
+          </div>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+
+  </table>
+</div>

@@ -1,0 +1,230 @@
+{
+  "kind": "PodList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/staging/pods",
+    "resourceVersion": "4121329"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "api-build131-n4yd0",
+        "generateName": "api-build131-",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/pods/api-build131-n4yd0",
+        "uid": "1d916905-6b69-11e5-b2cf-42010af061aa",
+        "resourceVersion": "3941208",
+        "creationTimestamp": "2015-10-05T13:58:11Z",
+        "labels": {
+          "app": "backend",
+          "component": "internal",
+          "deployment": "9cbbf31769826ec5c4f7b2e1c268cab1",
+          "role": "api"
+        },
+        "annotations": {
+          "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"staging\",\"name\":\"api-build131\",\"uid\":\"1bc01654-6b69-11e5-b2cf-42010af061aa\",\"apiVersion\":\"v1\",\"resourceVersion\":\"3920045\"}}"
+        }
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "default-token-pnfj3",
+            "secret": {
+              "secretName": "default-token-pnfj3"
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "backend",
+            "image": "eu.gcr.io/k8s-mock/backend:latest",
+            "ports": [
+              {
+                "name": "http",
+                "containerPort": 80,
+                "protocol": "TCP"
+              },
+              {
+                "name": "management",
+                "containerPort": 8081,
+                "protocol": "TCP"
+              }
+            ],
+            "env": [
+              {
+                "name": "LOG_LEVEL",
+                "value": "INFO"
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "200m",
+                "memory": "512Mi"
+              }
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-pnfj3",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "livenessProbe": {
+              "httpGet": {
+                "path": "/healthcheck",
+                "port": 8081,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 60,
+              "timeoutSeconds": 1
+            },
+            "readinessProbe": {
+              "httpGet": {
+                "path": "/",
+                "port": 8081,
+                "scheme": "HTTP"
+              },
+              "initialDelaySeconds": 15,
+              "timeoutSeconds": 1
+            },
+            "terminationMessagePath": "/dev/termination-log",
+            "imagePullPolicy": "Always"
+          }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "nodeName": "kubernetes-minion-yykz"
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Ready",
+            "status": "True"
+          }
+        ],
+        "hostIP": "10.240.27.50",
+        "podIP": "10.244.4.20",
+        "startTime": "2015-10-05T13:58:11Z",
+        "containerStatuses": [
+          {
+            "name": "backend",
+            "state": {
+              "running": {
+                "startedAt": "2015-10-06T00:32:34Z"
+              }
+            },
+            "lastState": {
+              "terminated": {
+                "exitCode": 143,
+                "startedAt": "2015-10-05T13:58:21Z",
+                "finishedAt": "2015-10-06T00:32:33Z",
+                "containerID": "docker://400efaf54cbc238762e153dd1ab99cbeeae3723e148e087073e7c664c078dae1"
+              }
+            },
+            "ready": true,
+            "restartCount": 1,
+            "image": "eu.gcr.io/k8s-mock/backend:latest",
+            "imageID": "docker://7e544cb9cec3a6c9d705de636e518f574f8463d81b44c1c7b543ce3954227ad2",
+            "containerID": "docker://f37809c83936602d90f9c7fb495630d6de9c69e1f761170ade23234ad5483fbf"
+          }
+        ]
+      }
+    },
+    {
+      "metadata": {
+        "name": "memcached-rgie9",
+        "generateName": "memcached-",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/pods/memcached-rgie9",
+        "uid": "b94d53a9-4cbd-11e5-b2cf-42010af061aa",
+        "resourceVersion": "3025647",
+        "creationTimestamp": "2015-08-27T13:15:44Z",
+        "labels": {
+          "app": "memcached"
+        },
+        "annotations": {
+          "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"staging\",\"name\":\"memcached\",\"uid\":\"94c731ec-4584-11e5-879f-42010af061aa\",\"apiVersion\":\"v1\",\"resourceVersion\":\"1525453\"}}"
+        }
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "default-token-pnfj3",
+            "secret": {
+              "secretName": "default-token-pnfj3"
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "memcached",
+            "image": "memcached",
+            "command": [
+              "memcached",
+              "-vv",
+              "-m 384"
+            ],
+            "ports": [
+              {
+                "name": "memcached",
+                "containerPort": 11211,
+                "protocol": "TCP"
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "50m",
+                "memory": "512Mi"
+              }
+            },
+            "volumeMounts": [
+              {
+                "name": "default-token-pnfj3",
+                "readOnly": true,
+                "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+              }
+            ],
+            "terminationMessagePath": "/dev/termination-log",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "default",
+        "serviceAccount": "default",
+        "nodeName": "kubernetes-minion-u0yq"
+      },
+      "status": {
+        "phase": "Running",
+        "conditions": [
+          {
+            "type": "Ready",
+            "status": "True"
+          }
+        ],
+        "hostIP": "10.240.188.101",
+        "podIP": "10.244.2.25",
+        "startTime": "2015-08-27T13:15:45Z",
+        "containerStatuses": [
+          {
+            "name": "memcached",
+            "state": {
+              "running": {
+                "startedAt": "2015-08-27T13:15:45Z"
+              }
+            },
+            "lastState": {},
+            "ready": true,
+            "restartCount": 0,
+            "image": "memcached",
+            "imageID": "docker://8a05b51f887650a248bf4a746d0c61518964ebe38dcfbe86490f502ebfe2ecd5",
+            "containerID": "docker://ecc3863aff28900851d7b5e1e921b6de2f4d0b6ef78fdc33cdcdcb61a98ffe29"
+          }
+        ]
+      }
+    }
+  ]
+}

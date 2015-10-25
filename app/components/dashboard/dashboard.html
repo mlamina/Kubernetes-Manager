@@ -1,0 +1,34 @@
+<div class="col-sm-3 col-md-2 sidebar" ui-view="menu">
+
+</div>
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main container-fluid">
+  <div class="page-header">
+    <h1>{{current_namespace }}</h1>
+  </div>
+  <div class="row">
+    <!-- RCs -->
+    <div class="col-md-6">
+      <div ui-view="rc">
+
+      </div>
+    </div>
+    <!-- Services -->
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading"><b>Services</b></div>
+        <div ui-view="services"></div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <!-- Pods -->
+    <div class="col-md-12">
+      <div class="panel panel-default">
+        <div class="panel-heading"><b>Pods</b></div>
+        <div ui-view="pods"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,113 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "elasticsearch-data-1-livhc",
+    "generateName": "elasticsearch-data-1-",
+    "namespace": "default",
+    "selfLink": "/api/v1/namespaces/default/pods/elasticsearch-data-1-livhc",
+    "uid": "0118946f-5b02-11e5-b2cf-42010af061aa",
+    "resourceVersion": "2914571",
+    "creationTimestamp": "2015-09-14T16:59:47Z",
+    "labels": {
+      "app": "elasticsearch",
+      "instance": "first",
+      "role": "data"
+    },
+    "annotations": {
+      "kubernetes.io/created-by": "{\"kind\":\"SerializedReference\",\"apiVersion\":\"v1\",\"reference\":{\"kind\":\"ReplicationController\",\"namespace\":\"default\",\"name\":\"elasticsearch-data-1\",\"uid\":\"9d2351e9-4b3c-11e5-b2cf-42010af061aa\",\"apiVersion\":\"v1\",\"resourceVersion\":\"1542385\"}}"
+    }
+  },
+  "spec": {
+    "volumes": [
+      {
+        "name": "storage",
+        "gcePersistentDisk": {
+          "pdName": "elasticsearch-disk-1",
+          "fsType": "ext4"
+        }
+      },
+      {
+        "name": "elasticsearch-token-rktxf",
+        "secret": {
+          "secretName": "elasticsearch-token-rktxf"
+        }
+      }
+    ],
+    "containers": [
+      {
+        "name": "elasticsearch-data",
+        "image": "pires/elasticsearch:data",
+        "ports": [
+          {
+            "name": "transport",
+            "containerPort": 9300,
+            "protocol": "TCP"
+          }
+        ],
+        "env": [
+          {
+            "name": "KUBERNETES_TRUST_CERT",
+            "value": "true"
+          },
+          {
+            "name": "ES_HEAP_SIZE",
+            "value": "960m"
+          }
+        ],
+        "resources": {
+          "limits": {
+            "cpu": "300m",
+            "memory": "1Gi"
+          }
+        },
+        "volumeMounts": [
+          {
+            "name": "storage",
+            "mountPath": "/data"
+          },
+          {
+            "name": "elasticsearch-token-rktxf",
+            "readOnly": true,
+            "mountPath": "/var/run/secrets/kubernetes.io/serviceaccount"
+          }
+        ],
+        "terminationMessagePath": "/dev/termination-log",
+        "imagePullPolicy": "IfNotPresent"
+      }
+    ],
+    "restartPolicy": "Always",
+    "dnsPolicy": "ClusterFirst",
+    "serviceAccountName": "elasticsearch",
+    "serviceAccount": "elasticsearch",
+    "nodeName": "kubernetes-minion-yykz"
+  },
+  "status": {
+    "phase": "Running",
+    "conditions": [
+      {
+        "type": "Ready",
+        "status": "True"
+      }
+    ],
+    "hostIP": "10.240.27.50",
+    "podIP": "10.244.4.11",
+    "startTime": "2015-09-14T17:01:43Z",
+    "containerStatuses": [
+      {
+        "name": "elasticsearch-data",
+        "state": {
+          "running": {
+            "startedAt": "2015-09-14T17:56:10Z"
+          }
+        },
+        "lastState": {},
+        "ready": true,
+        "restartCount": 0,
+        "image": "pires/elasticsearch:data",
+        "imageID": "docker://dd3e1a0e1b51a4df9fc27b1e646fec7303f08f0c10196fd0797ff5dac32fc5d7",
+        "containerID": "docker://80089d9a6f1fdfc9d46ca5c5db33523e77e013180a2359ed201dac169ab0948a"
+      }
+    ]
+  }
+}

@@ -1,0 +1,70 @@
+<div>
+  <div class="modal-header">
+    <h3 class="modal-title"><span pod-status></span> {{ pod.metadata.name }}</h3>
+  </div>
+  <div class="modal-body">
+    <h4>Info</h4>
+    <div class="row">
+      <div class="col-md-6">
+        <table class="table table-condensed">
+          <tr>
+            <td><b>Namespace</b>:</td>
+            <td>{{ pod.metadata.namespace }}</td>
+          </tr>
+          <tr>
+            <td><b>Node</b>:</td>
+            <td>{{ pod.spec.nodeName }}</td>
+          </tr>
+          <tr>
+            <td><b>Restart Policy</b>:</td>
+            <td>{{ pod.spec.restartPolicy }}</td>
+          </tr>
+        </table>
+      </div>
+      <div class="col-md-6">
+        <table class="table table-condensed">
+          <tr>
+            <td><b>Created</b>:</td>
+            <td>{{ pod.metadata.creationTimestamp | date:'medium' }}</td>
+          </tr>
+          <tr>
+            <td><b>Host IP</b>:</td>
+            <td>{{ pod.status.hostIP }}</td>
+          </tr>
+          <tr>
+            <td><b>Pod IP</b>:</td>
+            <td>{{ pod.status.podIP }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+    <div>
+      <h4>Labels</h4>
+      <span class="label label-info" ng-repeat="(key,value) in pod.metadata.labels" style="margin-left: 5px;">
+        {{key}}:{{value}}
+      </span>
+    </div>
+    <h4>Containers</h4>
+    <ul class="list-group">
+      <li class="list-group-item"
+          ng-repeat="container in pod.spec.containers"
+          ng-class="{'list-group-item-success': containerStatuses[container.name].ready, 'list-group-item-warning': !containerStatuses[container.name].ready}">
+        <b>{{ container.name }}</b> [{{ container.image }}] <span class="badge">{{ containerStatuses[container.name].restartCount}}</span>
+      </li>
+    </ul>
+
+    <h4>Logs</h4>
+    <div class="well well-sm">
+      <table class="table table-condensed">
+        <tr ng-repeat="line in log.lines">
+          <td>{{ line }}</td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-danger" type="button" ng-click="delete()">Delete</button>
+    <button class="btn btn-primary" style="width: 200px" type="button" ng-click="close()">Close</button>
+  </div>
+</div>

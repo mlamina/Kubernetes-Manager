@@ -1,0 +1,389 @@
+{
+  "kind": "ReplicationControllerList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/staging/replicationcontrollers",
+    "resourceVersion": "4121325"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "api-build131",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/replicationcontrollers/api-build131",
+        "uid": "1bc01654-6b69-11e5-b2cf-42010af061aa",
+        "resourceVersion": "3920113",
+        "generation": 2,
+        "creationTimestamp": "2015-10-05T13:58:08Z",
+        "labels": {
+          "app": "backend",
+          "component": "internal",
+          "role": "api"
+        },
+        "annotations": {
+          "kubectl.kubernetes.io/next-controller-id": "api-build118"
+        }
+      },
+      "spec": {
+        "replicas": 2,
+        "selector": {
+          "app": "backend",
+          "component": "internal",
+          "deployment": "9cbbf31769826ec5c4f7b2e1c268cab1",
+          "role": "api"
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "backend",
+              "component": "internal",
+              "deployment": "9cbbf31769826ec5c4f7b2e1c268cab1",
+              "role": "api"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "backend",
+                "image": "eu.gcr.io/k8s-mock/backend:latest",
+                "ports": [
+                  {
+                    "name": "http",
+                    "containerPort": 80,
+                    "protocol": "TCP"
+                  },
+                  {
+                    "name": "management",
+                    "containerPort": 8081,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "LOG_LEVEL",
+                    "value": "INFO"
+                  },
+                  {
+                    "name": "EMAILS_ENABLED",
+                    "value": "true"
+                  },
+                  {
+                    "name": "ROLE",
+                    "value": "api"
+                  },
+                  {
+                    "name": "ENVIRONMENT",
+                    "value": "staging"
+                  },
+                  {
+                    "name": "LOGSTASH",
+                    "value": "logstash.default.svc.cluster.local"
+                  },
+                  {
+                    "name": "DB_URL",
+                    "value": "mock"
+                  },
+                  {
+                    "name": "DB_USER",
+                    "value": "mock"
+                  },
+                  {
+                    "name": "DATABASE",
+                    "value": "mock"
+                  },
+                  {
+                    "name": "DB_PASSWORD",
+                    "value": "mock"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "512Mi"
+                  }
+                },
+                "livenessProbe": {
+                  "httpGet": {
+                    "path": "/healthcheck",
+                    "port": 8081,
+                    "scheme": "HTTP"
+                  },
+                  "initialDelaySeconds": 60,
+                  "timeoutSeconds": 1
+                },
+                "readinessProbe": {
+                  "httpGet": {
+                    "path": "/",
+                    "port": 8081,
+                    "scheme": "HTTP"
+                  },
+                  "initialDelaySeconds": 15,
+                  "timeoutSeconds": 1
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "Always"
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst"
+          }
+        }
+      },
+      "status": {
+        "replicas": 0,
+        "observedGeneration": 2
+      }
+    },
+    {
+      "metadata": {
+        "name": "api-ssl-proxy",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/replicationcontrollers/api-ssl-proxy",
+        "uid": "4c6d0e7d-3d03-11e5-879f-42010af061aa",
+        "resourceVersion": "2906658",
+        "creationTimestamp": "2015-08-07T12:53:28Z",
+        "labels": {
+          "app": "backend",
+          "component": "ssl-proxy",
+          "role": "api"
+        }
+      },
+      "spec": {
+        "replicas": 3,
+        "selector": {
+          "app": "backend",
+          "component": "ssl-proxy",
+          "role": "api"
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "backend",
+              "component": "ssl-proxy",
+              "role": "api"
+            }
+          },
+          "spec": {
+            "volumes": [
+              {
+                "name": "secrets",
+                "secret": {
+                  "secretName": "mock-secrets"
+                }
+              }
+            ],
+            "containers": [
+              {
+                "name": "nginx-ssl-proxy",
+                "image": "eu.gcr.io/k8s-mock/nginx-ssl-proxy:latest",
+                "ports": [
+                  {
+                    "name": "http",
+                    "containerPort": 80,
+                    "protocol": "TCP"
+                  },
+                  {
+                    "name": "https",
+                    "containerPort": 443,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "TARGET_SERVICE",
+                    "value": "api:80"
+                  },
+                  {
+                    "name": "ENABLE_SSL",
+                    "value": "true"
+                  },
+                  {
+                    "name": "ENABLE_BASIC_AUTH",
+                    "value": "false"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "100m",
+                    "memory": "128Mi"
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "secrets",
+                    "readOnly": true,
+                    "mountPath": "/etc/secrets"
+                  }
+                ],
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "Always"
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst"
+          }
+        }
+      },
+      "status": {
+        "replicas": 1
+      }
+    },
+    {
+      "metadata": {
+        "name": "database",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/replicationcontrollers/database",
+        "uid": "eb89142d-4b38-11e5-b2cf-42010af061aa",
+        "resourceVersion": "1540575",
+        "generation": 1,
+        "creationTimestamp": "2015-08-25T14:52:34Z",
+        "labels": {
+          "app": "postgres"
+        }
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "app": "postgres"
+        },
+        "template": {
+          "metadata": {
+            "name": "database",
+            "namespace": "staging",
+            "creationTimestamp": null,
+            "labels": {
+              "app": "postgres"
+            }
+          },
+          "spec": {
+            "volumes": [
+              {
+                "name": "postgres-persistent-storage",
+                "gcePersistentDisk": {
+                  "pdName": "postgresql-disk-staging",
+                  "fsType": "ext4"
+                }
+              }
+            ],
+            "containers": [
+              {
+                "name": "postgres",
+                "image": "postgres",
+                "ports": [
+                  {
+                    "name": "postgres",
+                    "containerPort": 5432,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "PGDATA",
+                    "value": "/var/lib/postgresql/data/pgdata"
+                  },
+                  {
+                    "name": "POSTGRES_USER",
+                    "value": "mock"
+                  },
+                  {
+                    "name": "POSTGRES_PASSWORD",
+                    "value": "mock"
+                  },
+                  {
+                    "name": "POSTGRES_DB",
+                    "value": "mock"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "200m",
+                    "memory": "256Mi"
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "postgres-persistent-storage",
+                    "mountPath": "/var/lib/postgresql/data"
+                  }
+                ],
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent"
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst"
+          }
+        }
+      },
+      "status": {
+        "replicas": 1,
+        "observedGeneration": 1
+      }
+    },
+
+    {
+      "metadata": {
+        "name": "memcached",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/replicationcontrollers/memcached",
+        "uid": "94c731ec-4584-11e5-879f-42010af061aa",
+        "resourceVersion": "1629042",
+        "generation": 3,
+        "creationTimestamp": "2015-08-18T08:39:03Z",
+        "labels": {
+          "app": "memcached"
+        }
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "app": "memcached"
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "memcached"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "memcached",
+                "image": "memcached",
+                "command": [
+                  "memcached",
+                  "-vv",
+                  "-m 384"
+                ],
+                "ports": [
+                  {
+                    "name": "memcached",
+                    "containerPort": 11211,
+                    "protocol": "TCP"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "50m",
+                    "memory": "512Mi"
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent"
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst"
+          }
+        }
+      },
+      "status": {
+        "replicas": 1,
+        "observedGeneration": 3
+      }
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+<h4>Namespaces</h4>
+<ul class="nav nav-sidebar">
+  <li ng-repeat="namespace in namespaces" ng-class="{active: current_namespace == namespace.metadata.name}">
+    <a ui-sref="dashboard({namespace: namespace.metadata.name})">{{namespace.metadata.name}}</a>
+  </li>
+</ul>
+<h4>Resource Quotas</h4>
+<ul class="nav nav-sidebar">
+  <li ng-repeat="quota in quotas" style="padding-left: 10px; padding-right: 10px;">
+    <div class="panel panel-default">
+      <div class="panel-heading"><b>{{ quota.metadata.namespace }}</b></div>
+      <table class="table table-condensed"  >
+        <tr>
+          <td>RAM</td>
+          <td>
+            {{quota.status.used.memory}} / {{quota.status.hard.memory}}
+          </td>
+        </tr>
+        <tr>
+          <td>CPU</td>
+          <td>
+            {{quota.status.used.cpu}} / {{quota.status.hard.cpu}}
+          </td>
+        </tr>
+      </table>
+    </div>
+  </li>
+</ul>

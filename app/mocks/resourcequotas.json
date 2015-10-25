@@ -1,0 +1,114 @@
+{
+  "kind": "ResourceQuotaList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/resourcequotas",
+    "resourceVersion": "4732338"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "quota",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/resourcequotas/quota",
+        "uid": "e0a41e2a-400d-11e5-879f-42010af061aa",
+        "resourceVersion": "4725665",
+        "creationTimestamp": "2015-08-11T09:46:45Z"
+      },
+      "spec": {
+        "hard": {
+          "cpu": "2500m",
+          "memory": "7Gi"
+        }
+      },
+      "status": {
+        "hard": {
+          "cpu": "2500m",
+          "memory": "7Gi"
+        },
+        "used": {
+          "cpu": "1900m",
+          "memory": "5982833152"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "quota",
+        "namespace": "jenkins-slave",
+        "selfLink": "/api/v1/namespaces/jenkins-slave/resourcequotas/quota",
+        "uid": "e976aeca-4011-11e5-879f-42010af061aa",
+        "resourceVersion": "4726493",
+        "creationTimestamp": "2015-08-11T10:15:38Z"
+      },
+      "spec": {
+        "hard": {
+          "cpu": "1",
+          "memory": "5Gi"
+        }
+      },
+      "status": {
+        "hard": {
+          "cpu": "1",
+          "memory": "5Gi"
+        },
+        "used": {
+          "cpu": "0",
+          "memory": "0"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "quota",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/resourcequotas/quota",
+        "uid": "d99bfff6-400d-11e5-879f-42010af061aa",
+        "resourceVersion": "4730522",
+        "creationTimestamp": "2015-08-11T09:46:33Z"
+      },
+      "spec": {
+        "hard": {
+          "cpu": "2",
+          "memory": "6Gi"
+        }
+      },
+      "status": {
+        "hard": {
+          "cpu": "2",
+          "memory": "6Gi"
+        },
+        "used": {
+          "cpu": "1300m",
+          "memory": "4429185024"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "quota",
+        "namespace": "testing",
+        "selfLink": "/api/v1/namespaces/testing/resourcequotas/quota",
+        "uid": "cbbeff0e-5701-11e5-b2cf-42010af061aa",
+        "resourceVersion": "2963992",
+        "creationTimestamp": "2015-09-09T14:48:12Z"
+      },
+      "spec": {
+        "hard": {
+          "cpu": "2",
+          "memory": "1Gi"
+        }
+      },
+      "status": {
+        "hard": {
+          "cpu": "2",
+          "memory": "1Gi"
+        },
+        "used": {
+          "cpu": "400m",
+          "memory": "461373440"
+        }
+      }
+    }
+  ]
+}

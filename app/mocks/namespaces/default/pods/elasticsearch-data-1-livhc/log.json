@@ -1,0 +1,6 @@
+I1023 09:49:00.474837       1 heapster.go:52] /heapster --source=kubernetes:'' --sink=influxdb:http://monitoring-influxdb:8086
+I1023 09:49:00.474998       1 heapster.go:53] Heapster version 0.16.1
+I1023 09:49:00.475872       1 kube_factory.go:169] Using Kubernetes client with master "https://10.0.0.1:443" and version "v1"
+I1023 09:49:00.475917       1 kube_factory.go:170] Using kubelet port 10255
+I1023 09:49:00.501573       1 driver.go:376] created influxdb sink with options: {root root monitoring-influxdb:8086 k8s false}
+I1023 09:49:00.502390       1 heapster.go:64] Starting heapster on port 8082

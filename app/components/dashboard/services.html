@@ -1,0 +1,8 @@
+<table class="table table-striped">
+  <tr ng-repeat="svc in services">
+    <td>{{svc.metadata.name}}</td>
+    <!--<td><span ng-repeat="(key,value) in rc.metadata.labels" class="label label-info">{{key}}:{{value}}</span> </td>-->
+    <td><span ng-repeat="port in svc.spec.ports" class="badge">{{port.protocol}}/{{port.port}}</span> </td>
+    <td><span class="label label-info" ng-if="svc.status.loadBalancer.ingress">{{ svc.status.loadBalancer.ingress[0].ip }}</span> </td>
+  </tr>
+</table>

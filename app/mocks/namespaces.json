@@ -1,0 +1,65 @@
+{
+  "kind": "NamespaceList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces",
+    "resourceVersion": "4121275"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "default",
+        "selfLink": "/api/v1/namespaces/default",
+        "uid": "681bf1b0-3cef-11e5-9e70-42010af061aa",
+        "resourceVersion": "5",
+        "creationTimestamp": "2015-08-07T10:31:04Z"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+
+    {
+      "metadata": {
+        "name": "kube-system",
+        "selfLink": "/api/v1/namespaces/kube-system",
+        "uid": "6d81111a-3cef-11e5-9e70-42010af061aa",
+        "resourceVersion": "83",
+        "creationTimestamp": "2015-08-07T10:31:13Z"
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    },
+    {
+      "metadata": {
+        "name": "staging",
+        "selfLink": "/api/v1/namespaces/staging",
+        "uid": "28dadf5e-3d00-11e5-879f-42010af061aa",
+        "resourceVersion": "8419",
+        "creationTimestamp": "2015-08-07T12:30:59Z",
+        "labels": {
+          "name": "staging"
+        }
+      },
+      "spec": {
+        "finalizers": [
+          "kubernetes"
+        ]
+      },
+      "status": {
+        "phase": "Active"
+      }
+    }
+  ]
+}

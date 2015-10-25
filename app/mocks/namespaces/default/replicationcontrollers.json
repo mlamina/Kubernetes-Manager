@@ -1,0 +1,555 @@
+{
+  "kind": "ReplicationControllerList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/default/replicationcontrollers",
+    "resourceVersion": "4121320"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "elasticsearch-data-1",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/replicationcontrollers/elasticsearch-data-1",
+        "uid": "9d2351e9-4b3c-11e5-b2cf-42010af061aa",
+        "resourceVersion": "2906603",
+        "generation": 2,
+        "creationTimestamp": "2015-08-25T15:19:01Z",
+        "labels": {
+          "app": "elasticsearch",
+          "instance": "first",
+          "role": "data"
+        }
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "app": "elasticsearch",
+          "instance": "first",
+          "role": "data"
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "elasticsearch",
+              "instance": "first",
+              "role": "data"
+            }
+          },
+          "spec": {
+            "volumes": [
+              {
+                "name": "storage",
+                "gcePersistentDisk": {
+                  "pdName": "elasticsearch-disk-1",
+                  "fsType": "ext4"
+                }
+              }
+            ],
+            "containers": [
+              {
+                "name": "elasticsearch-data",
+                "image": "pires/elasticsearch:data",
+                "ports": [
+                  {
+                    "name": "transport",
+                    "containerPort": 9300,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "KUBERNETES_TRUST_CERT",
+                    "value": "true"
+                  },
+                  {
+                    "name": "ES_HEAP_SIZE",
+                    "value": "960m"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "300m",
+                    "memory": "1Gi"
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "storage",
+                    "mountPath": "/data"
+                  }
+                ],
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent"
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst",
+            "serviceAccountName": "elasticsearch",
+            "serviceAccount": "elasticsearch"
+          }
+        }
+      },
+      "status": {
+        "replicas": 1,
+        "observedGeneration": 2
+      }
+    },
+    {
+      "metadata": {
+        "name": "elasticsearch-data-2",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/replicationcontrollers/elasticsearch-data-2",
+        "uid": "9bd93bd5-4b3c-11e5-b2cf-42010af061aa",
+        "resourceVersion": "2956510",
+        "generation": 2,
+        "creationTimestamp": "2015-08-25T15:18:58Z",
+        "labels": {
+          "app": "elasticsearch",
+          "instance": "second",
+          "role": "data"
+        }
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "app": "elasticsearch",
+          "instance": "second",
+          "role": "data"
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "elasticsearch",
+              "instance": "second",
+              "role": "data"
+            }
+          },
+          "spec": {
+            "volumes": [
+              {
+                "name": "storage",
+                "gcePersistentDisk": {
+                  "pdName": "elasticsearch-disk-2",
+                  "fsType": "ext4"
+                }
+              }
+            ],
+            "containers": [
+              {
+                "name": "elasticsearch-data",
+                "image": "pires/elasticsearch:data",
+                "ports": [
+                  {
+                    "name": "transport",
+                    "containerPort": 9300,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "KUBERNETES_TRUST_CERT",
+                    "value": "true"
+                  },
+                  {
+                    "name": "ES_HEAP_SIZE",
+                    "value": "960m"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "300m",
+                    "memory": "1Gi"
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "storage",
+                    "mountPath": "/data"
+                  }
+                ],
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent"
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst",
+            "serviceAccountName": "elasticsearch",
+            "serviceAccount": "elasticsearch"
+          }
+        }
+      },
+      "status": {
+        "replicas": 1,
+        "observedGeneration": 2
+      }
+    },
+    {
+      "metadata": {
+        "name": "elasticsearch-lb",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/replicationcontrollers/elasticsearch-lb",
+        "uid": "57fb7076-4b2c-11e5-b2cf-42010af061aa",
+        "resourceVersion": "1543910",
+        "generation": 3,
+        "creationTimestamp": "2015-08-25T13:22:33Z",
+        "labels": {
+          "app": "elasticsearch",
+          "role": "load-balancer"
+        }
+      },
+      "spec": {
+        "replicas": 2,
+        "selector": {
+          "app": "elasticsearch",
+          "role": "load-balancer"
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "elasticsearch",
+              "role": "load-balancer"
+            }
+          },
+          "spec": {
+            "volumes": [
+              {
+                "name": "storage",
+                "emptyDir": {}
+              }
+            ],
+            "containers": [
+              {
+                "name": "elasticsearch-lb",
+                "image": "pires/elasticsearch:lb",
+                "ports": [
+                  {
+                    "name": "http",
+                    "containerPort": 9200,
+                    "protocol": "TCP"
+                  },
+                  {
+                    "name": "transport",
+                    "containerPort": 9300,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "KUBERNETES_TRUST_CERT",
+                    "value": "true"
+                  },
+                  {
+                    "name": "ES_HEAP_SIZE",
+                    "value": "256m"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "100m",
+                    "memory": "320Mi"
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "storage",
+                    "mountPath": "/data"
+                  }
+                ],
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent"
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst",
+            "serviceAccountName": "elasticsearch",
+            "serviceAccount": "elasticsearch"
+          }
+        }
+      },
+      "status": {
+        "replicas": 1,
+        "observedGeneration": 3
+      }
+    },
+    {
+      "metadata": {
+        "name": "elasticsearch-master",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/replicationcontrollers/elasticsearch-master",
+        "uid": "e51776ad-4b31-11e5-b2cf-42010af061aa",
+        "resourceVersion": "1538099",
+        "generation": 4,
+        "creationTimestamp": "2015-08-25T14:02:17Z",
+        "labels": {
+          "app": "elasticsearch",
+          "role": "master"
+        }
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "app": "elasticsearch",
+          "role": "master"
+        },
+        "template": {
+          "metadata": {
+            "creationTimestamp": null,
+            "labels": {
+              "app": "elasticsearch",
+              "role": "master"
+            }
+          },
+          "spec": {
+            "volumes": [
+              {
+                "name": "storage",
+                "emptyDir": {}
+              }
+            ],
+            "containers": [
+              {
+                "name": "elasticsearch-master",
+                "image": "pires/elasticsearch:master",
+                "ports": [
+                  {
+                    "name": "transport",
+                    "containerPort": 9300,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "KUBERNETES_TRUST_CERT",
+                    "value": "true"
+                  },
+                  {
+                    "name": "ES_HEAP_SIZE",
+                    "value": "256m"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "100m",
+                    "memory": "512Mi"
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "storage",
+                    "mountPath": "/data"
+                  }
+                ],
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent"
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst",
+            "serviceAccountName": "elasticsearch",
+            "serviceAccount": "elasticsearch"
+          }
+        }
+      },
+      "status": {
+        "replicas": 1,
+        "observedGeneration": 4
+      }
+    },
+    {
+      "metadata": {
+        "name": "kibana",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/replicationcontrollers/kibana",
+        "uid": "89a95ccc-4d7e-11e5-b2cf-42010af061aa",
+        "resourceVersion": "2906613",
+        "generation": 3,
+        "creationTimestamp": "2015-08-28T12:15:57Z",
+        "labels": {
+          "app": "kibana"
+        }
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "app": "kibana"
+        },
+        "template": {
+          "metadata": {
+            "name": "kibana",
+            "creationTimestamp": null,
+            "labels": {
+              "app": "kibana"
+            }
+          },
+          "spec": {
+            "volumes": [
+              {
+                "name": "secrets",
+                "secret": {
+                  "secretName": "mock-secrets"
+                }
+              }
+            ],
+            "containers": [
+              {
+                "name": "kibana",
+                "image": "kibana:4.1.1",
+                "ports": [
+                  {
+                    "name": "internal-http",
+                    "containerPort": 5601,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "ELASTICSEARCH_URL",
+                    "value": "http://elasticsearch:9200"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "100m",
+                    "memory": "256Mi"
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "IfNotPresent"
+              },
+              {
+                "name": "nginx-ssl-proxy",
+                "image": "eu.gcr.io/k8s-mock/nginx-ssl-proxy:latest",
+                "ports": [
+                  {
+                    "name": "http",
+                    "containerPort": 80,
+                    "protocol": "TCP"
+                  },
+                  {
+                    "name": "https",
+                    "containerPort": 443,
+                    "protocol": "TCP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "TARGET_SERVICE",
+                    "value": "localhost:5601"
+                  },
+                  {
+                    "name": "ENABLE_SSL",
+                    "value": "true"
+                  },
+                  {
+                    "name": "ENABLE_BASIC_AUTH",
+                    "value": "true"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "50m",
+                    "memory": "56Mi"
+                  }
+                },
+                "volumeMounts": [
+                  {
+                    "name": "secrets",
+                    "readOnly": true,
+                    "mountPath": "/etc/secrets"
+                  }
+                ],
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "Always"
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst"
+          }
+        }
+      },
+      "status": {
+        "replicas": 0,
+        "observedGeneration": 3
+      }
+    },
+    {
+      "metadata": {
+        "name": "logstash",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/replicationcontrollers/logstash",
+        "uid": "d2b9817d-40f6-11e5-879f-42010af061aa",
+        "resourceVersion": "1539304",
+        "generation": 6,
+        "creationTimestamp": "2015-08-12T13:34:14Z",
+        "labels": {
+          "app": "logstash"
+        }
+      },
+      "spec": {
+        "replicas": 1,
+        "selector": {
+          "app": "logstash"
+        },
+        "template": {
+          "metadata": {
+            "name": "logstash",
+            "creationTimestamp": null,
+            "labels": {
+              "app": "logstash"
+            }
+          },
+          "spec": {
+            "containers": [
+              {
+                "name": "logstash",
+                "image": "eu.gcr.io/k8s-mock/logstash:latest",
+                "command": [
+                  "logstash",
+                  "--verbose",
+                  "-f",
+                  "/config-dir/logstash.conf"
+                ],
+                "ports": [
+                  {
+                    "name": "udp",
+                    "containerPort": 514,
+                    "protocol": "UDP"
+                  },
+                  {
+                    "name": "udp-http",
+                    "containerPort": 515,
+                    "protocol": "UDP"
+                  }
+                ],
+                "env": [
+                  {
+                    "name": "LS_HEAP_SIZE",
+                    "value": "384m"
+                  }
+                ],
+                "resources": {
+                  "limits": {
+                    "cpu": "100m",
+                    "memory": "512Mi"
+                  }
+                },
+                "terminationMessagePath": "/dev/termination-log",
+                "imagePullPolicy": "Always"
+              }
+            ],
+            "restartPolicy": "Always",
+            "dnsPolicy": "ClusterFirst"
+          }
+        }
+      },
+      "status": {
+        "replicas": 1,
+        "observedGeneration": 6
+      }
+    }
+  ]
+}

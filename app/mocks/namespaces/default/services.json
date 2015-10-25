@@ -1,0 +1,196 @@
+{
+  "kind": "ServiceList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/default/services",
+    "resourceVersion": "4728813"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "elasticsearch",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/services/elasticsearch",
+        "uid": "57f278f2-4b2c-11e5-b2cf-42010af061aa",
+        "resourceVersion": "1528750",
+        "creationTimestamp": "2015-08-25T13:22:33Z",
+        "labels": {
+          "app": "elasticsearch",
+          "role": "load-balancer"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "protocol": "TCP",
+            "port": 9200,
+            "targetPort": 9200,
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "app": "elasticsearch",
+          "role": "load-balancer"
+        },
+        "clusterIP": "10.0.45.74",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "metadata": {
+        "name": "elasticsearch-discovery",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/services/elasticsearch-discovery",
+        "uid": "e50d9206-4b31-11e5-b2cf-42010af061aa",
+        "resourceVersion": "1534577",
+        "creationTimestamp": "2015-08-25T14:02:17Z",
+        "labels": {
+          "app": "elasticsearch",
+          "role": "master"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "transport",
+            "protocol": "TCP",
+            "port": 9300,
+            "targetPort": 9300,
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "app": "elasticsearch",
+          "role": "master"
+        },
+        "clusterIP": "10.0.205.100",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "metadata": {
+        "name": "kibana",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/services/kibana",
+        "uid": "318f9e21-4d7e-11e5-b2cf-42010af061aa",
+        "resourceVersion": "1679559",
+        "creationTimestamp": "2015-08-28T12:13:29Z",
+        "labels": {
+          "app": "kibana"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "https",
+            "protocol": "TCP",
+            "port": 443,
+            "targetPort": "https",
+            "nodePort": 32287
+          },
+          {
+            "name": "http",
+            "protocol": "TCP",
+            "port": 80,
+            "targetPort": "http",
+            "nodePort": 31019
+          }
+        ],
+        "selector": {
+          "app": "kibana"
+        },
+        "clusterIP": "10.0.21.117",
+        "type": "LoadBalancer",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {
+          "ingress": [
+            {
+              "ip": "146.444.19.779"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "kubernetes",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/services/kubernetes",
+        "uid": "681e61cc-3cef-11e5-9e70-42010af061aa",
+        "resourceVersion": "6",
+        "creationTimestamp": "2015-08-07T10:31:04Z",
+        "labels": {
+          "component": "apiserver",
+          "provider": "kubernetes"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "protocol": "TCP",
+            "port": 443,
+            "targetPort": 443,
+            "nodePort": 0
+          }
+        ],
+        "clusterIP": "10.0.0.1",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "metadata": {
+        "name": "logstash",
+        "namespace": "default",
+        "selfLink": "/api/v1/namespaces/default/services/logstash",
+        "uid": "9d82684f-41b3-11e5-879f-42010af061aa",
+        "resourceVersion": "976150",
+        "creationTimestamp": "2015-08-13T12:05:40Z",
+        "labels": {
+          "app": "logstash"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "udp",
+            "protocol": "UDP",
+            "port": 514,
+            "targetPort": 514,
+            "nodePort": 0
+          },
+          {
+            "name": "udp-http",
+            "protocol": "UDP",
+            "port": 515,
+            "targetPort": 515,
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "app": "logstash"
+        },
+        "clusterIP": "10.0.97.164",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    }
+  ]
+}

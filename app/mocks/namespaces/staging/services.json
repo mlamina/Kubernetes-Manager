@@ -1,0 +1,292 @@
+{
+  "kind": "ServiceList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/namespaces/staging/services",
+    "resourceVersion": "4719339"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "api",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/services/api",
+        "uid": "29d0fcd4-44e5-11e5-879f-42010af061aa",
+        "resourceVersion": "1160594",
+        "creationTimestamp": "2015-08-17T13:37:54Z",
+        "labels": {
+          "app": "backend",
+          "component": "service",
+          "role": "api"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "protocol": "TCP",
+            "port": 80,
+            "targetPort": 80,
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "app": "backend",
+          "component": "internal",
+          "role": "api"
+        },
+        "clusterIP": "10.0.170.137",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "metadata": {
+        "name": "api-lb",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/services/api-lb",
+        "uid": "29494c8c-4d59-11e5-b2cf-42010af061aa",
+        "resourceVersion": "1670988",
+        "creationTimestamp": "2015-08-28T07:48:24Z",
+        "labels": {
+          "app": "backend",
+          "component": "ssl-proxy-service",
+          "role": "api"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "https",
+            "protocol": "TCP",
+            "port": 443,
+            "targetPort": "https",
+            "nodePort": 31246
+          },
+          {
+            "name": "http",
+            "protocol": "TCP",
+            "port": 80,
+            "targetPort": "http",
+            "nodePort": 31132
+          }
+        ],
+        "selector": {
+          "app": "backend",
+          "component": "ssl-proxy",
+          "role": "api"
+        },
+        "clusterIP": "10.0.30.43",
+        "type": "LoadBalancer",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {
+          "ingress": [
+            {
+              "ip": "104.999.5.123"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "database",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/services/database",
+        "uid": "1e000f09-3d09-11e5-879f-42010af061aa",
+        "resourceVersion": "13898",
+        "creationTimestamp": "2015-08-07T13:35:07Z",
+        "labels": {
+          "app": "postgres"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "protocol": "TCP",
+            "port": 5432,
+            "targetPort": 5432,
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "app": "postgres"
+        },
+        "clusterIP": "10.0.186.48",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "metadata": {
+        "name": "dev-api",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/services/dev-api",
+        "uid": "d5f3b136-4714-11e5-879f-42010af061aa",
+        "resourceVersion": "1291503",
+        "creationTimestamp": "2015-08-20T08:24:11Z",
+        "labels": {
+          "app": "backend",
+          "component": "service",
+          "role": "dev-api"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "protocol": "TCP",
+            "port": 80,
+            "targetPort": 80,
+            "nodePort": 31063
+          }
+        ],
+        "selector": {
+          "app": "backend",
+          "component": "internal",
+          "role": "dev-api"
+        },
+        "clusterIP": "10.0.16.48",
+        "type": "LoadBalancer",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {
+          "ingress": [
+            {
+              "ip": "104.111.123.152"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "frontend",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/services/frontend",
+        "uid": "0c3c6886-3d03-11e5-879f-42010af061aa",
+        "resourceVersion": "10184",
+        "creationTimestamp": "2015-08-07T12:51:40Z",
+        "labels": {
+          "app": "frontend",
+          "component": "service",
+          "role": "preview"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "http",
+            "protocol": "TCP",
+            "port": 80,
+            "targetPort": 80,
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "app": "frontend",
+          "component": "staticfiles",
+          "role": "preview"
+        },
+        "clusterIP": "10.0.124.148",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    },
+    {
+      "metadata": {
+        "name": "frontend-lb",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/services/frontend-lb",
+        "uid": "0c4bb1ac-3d03-11e5-879f-42010af061aa",
+        "resourceVersion": "10285",
+        "creationTimestamp": "2015-08-07T12:51:40Z",
+        "labels": {
+          "app": "frontend",
+          "component": "loadbalancer",
+          "role": "preview"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "https",
+            "protocol": "TCP",
+            "port": 443,
+            "targetPort": "https",
+            "nodePort": 31143
+          },
+          {
+            "name": "http",
+            "protocol": "TCP",
+            "port": 80,
+            "targetPort": "http",
+            "nodePort": 30022
+          }
+        ],
+        "selector": {
+          "app": "frontend",
+          "component": "ssl-proxy",
+          "role": "preview"
+        },
+        "clusterIP": "10.0.65.7",
+        "type": "LoadBalancer",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {
+          "ingress": [
+            {
+              "ip": "146.444.21.111"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "memcached",
+        "namespace": "staging",
+        "selfLink": "/api/v1/namespaces/staging/services/memcached",
+        "uid": "94b94497-4584-11e5-879f-42010af061aa",
+        "resourceVersion": "1195880",
+        "creationTimestamp": "2015-08-18T08:39:03Z",
+        "labels": {
+          "app": "memcached"
+        }
+      },
+      "spec": {
+        "ports": [
+          {
+            "name": "memcached",
+            "protocol": "TCP",
+            "port": 11211,
+            "targetPort": 11211,
+            "nodePort": 0
+          }
+        ],
+        "selector": {
+          "app": "memcached"
+        },
+        "clusterIP": "10.0.175.116",
+        "type": "ClusterIP",
+        "sessionAffinity": "None"
+      },
+      "status": {
+        "loadBalancer": {}
+      }
+    }
+  ]
+}
