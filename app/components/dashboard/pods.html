@@ -1,16 +1,19 @@
-<table class="table table-striped">
-  <thead>
+<div class="panel panel-default">
+  <div class="panel-heading"><b>{{ pods.length }} Pods</b></div>
+  <table class="table table-striped">
+    <thead>
     <th>Status</th>
     <th>Name</th>
     <th>Labels</th>
     <th>Containers</th>
-  </thead>
-  <tbody>
+    </thead>
+    <tbody>
     <tr ng-repeat="pod in pods">
       <td><span pod-status></span></td>
       <td><a href="" ng-click="openModal(pod)">{{pod.metadata.name}}</a></td>
       <td><span ng-repeat="(key,value) in pod.metadata.labels" class="label label-primary" style="margin-right: 2px">{{value}}</span></td>
       <td><span ng-repeat="container in pod.spec.containers"><span class="label label-default" style="margin-right: 2px">{{container.name}}</span></span></td>
     </tr>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
