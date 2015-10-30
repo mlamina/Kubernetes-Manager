@@ -5,6 +5,7 @@ angular.module('k8s-manager', [
   'ngAnimate',
   'ui.bootstrap',
   'ui.router',
+  'angularMoment',
   'k8s-manager.api',
   'k8s-manager.overview',
   'k8s-manager.events',
