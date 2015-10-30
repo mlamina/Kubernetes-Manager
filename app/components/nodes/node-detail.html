@@ -3,10 +3,10 @@
     <h1>{{ nodeName }} <small>{{ details.num_cores }} Cores, {{ details.memory_capacity / 1024/1024/1024 | number:2}} GB</small></h1>
   </div>
   <div class="row">
-    <div class="col-md-6">
-      <div class="panel  panel-info">
+    <div class="col-md-12">
+      <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">CPU Utilization - {{ containers.stats.length }} seconds</h3>
+          <h3 class="panel-title" class="text-center"><i class="fa fa-line-chart"></i> CPU & Memory Utilization - {{ containers.stats.length }} seconds</h3>
         </div>
         <div class="panel-body">
           <linechart data="cpuChartData" options="cpuChartOptions" mode="" width="" height="200"></linechart>
@@ -23,7 +23,7 @@
     <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Containers</h3>
+          <h3 class="panel-title"><i class="fa fa-cubes"></i> Containers</h3>
         </div>
         <!--{{ containers | json }}-->
         <ul class="list-group">
@@ -33,10 +33,10 @@
     </div>
 
     <!-- Node volumes -->
-    <div class="col-md-4">
+    <div class="col-md-6">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">File Systems</h3>
+          <h3 class="panel-title"><i class="fa fa-hdd-o"></i> File Systems</h3>
         </div>
         <table class="table table-striped"  >
           <thead>
