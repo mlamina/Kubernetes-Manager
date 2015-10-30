@@ -4,3 +4,4 @@ I1023 09:49:00.475872       1 kube_factory.go:169] Using Kubernetes client with 
 I1023 09:49:00.475917       1 kube_factory.go:170] Using kubelet port 10255
 I1023 09:49:00.501573       1 driver.go:376] created influxdb sink with options: {root root monitoring-influxdb:8086 k8s false}
 I1023 09:49:00.502390       1 heapster.go:64] Starting heapster on port 8082
+I1023 09:49:00.502390       1 heapster.go:64] Starting heapster on port 8082

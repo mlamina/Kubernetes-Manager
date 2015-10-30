@@ -55,7 +55,7 @@
 
     <h4>Logs</h4>
     <div class="well well-sm">
-      <samp ng-repeat="line in log.lines">{{ line }}<br></samp>
+      <samp ng-repeat="line in log.lines track by $index">{{ line }}<br></samp>
     </div>
 
   </div>
