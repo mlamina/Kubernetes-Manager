@@ -6,6 +6,7 @@ angular.module('k8s-manager', [
   'ui.bootstrap',
   'ui.router',
   'angularMoment',
+  'n3-line-chart',
   'k8s-manager.api',
   'k8s-manager.overview',
   'k8s-manager.events',
@@ -117,7 +118,7 @@ angular.module('k8s-manager', [
     setAutoReloadInterval();
   }])
   .controller('AppMenuController', ['$state', '$scope', function($state, $scope) {
-
+    $scope.state = $state;
   }])
   .filter('bytes', function() {
     return function(bytes, precision) {

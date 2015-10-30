@@ -3,6 +3,19 @@
     <h1>{{ nodeName }} <small>{{ details.num_cores }} Cores, {{ details.memory_capacity / 1024/1024/1024 | number:2}} GB</small></h1>
   </div>
   <div class="row">
+    <div class="col-md-6">
+      <div class="panel  panel-info">
+        <div class="panel-heading">CPU Utilization</div>
+        <div class="panel-body">
+          <linechart data="cpuChartData" options="cpuChartOptions" mode="" width="" height="200"></linechart>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+  <div class="row">
 
     <!-- Node containers -->
     <div class="col-md-6">

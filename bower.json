@@ -14,7 +14,8 @@
     "angular-mocks": "~1.4.5",
     "angular-bootstrap": "~0.14.3",
     "html5-boilerplate": "~5.2.0",
-    "angular-moment": "~0.10.3"
+    "angular-moment": "~0.10.3",
+    "n3-line-chart": "~1.1.12"
   },
   "devDependencies": {
     "components-font-awesome": "~4.4.0"

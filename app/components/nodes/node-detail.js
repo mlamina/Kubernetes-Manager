@@ -35,4 +35,37 @@ angular.module('k8s-manager.nodes')
       usages[fs.device] = fs;
     });
     $scope.fsStats = usages;
+
+    // Configure CPU chart
+    $scope.cpuChartData = [];
+    var cpuCapacityPerSecond = details.num_cores * 1000000000; // cores * nanoseconds
+    for (var i=1; i < containers.stats.length; i++) {
+      var cpuUsage = containers.stats[i].cpu.usage.total - containers.stats[i-1].cpu.usage.total;
+      $scope.cpuChartData.push({
+        date: new Date(containers.stats[i].timestamp),
+        usage: (cpuUsage / cpuCapacityPerSecond) * 100
+      });
+    }
+
+    $scope.cpuChartOptions = {
+      axes: {
+        x: {key: 'date', type: 'date', thickness: '2px', ticks: 2},
+        y: {type: 'linear', min: 0, max: 100, ticks: 5, innerTicks: true, grid: true}
+      },
+      margin: {
+        left: 30,
+        right: 10,
+        bottom: 30
+      },
+      series: [
+        {y: 'usage', color: 'steelblue', thickness: '2px', type: 'area', striped: false, label: 'CPU Utilization', drawDots: false}
+      ],
+      lineMode: 'linear',
+      tension: 0.7,
+      //tooltip: {mode: 'scrubber', formatter: function(x, y, series) {return 'pouet';}},
+      drawLegend: false,
+      drawDots: false,
+      hideOverflow: false,
+      columnsHGap: 5
+    }
   }]);
