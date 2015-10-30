@@ -49,7 +49,16 @@ angular.module('k8s-manager.api')
   .factory('Pods', ['$http', 'UrlResolver', function($http, url) {
     return {
       byNamespace: function(namespace) {
-        return $http.get(url.get('/namespaces/'+namespace+'/pods')).then(unwrapItems);
+        return $http.get(url.get('/namespaces/'+namespace+'/pods'))
+          .then(unwrapItems)
+          .then(function(pods) {
+            // Count ready containers
+            angular.forEach(pods, function(pod) {
+              var readyContainers = pod.status.containerStatuses.filter(function(stat) { return stat.ready });
+              pod.containersReady = readyContainers.length;
+            });
+            return pods;
+        });
       },
       getPod: function(namespace, name) {
         return $http.get(url.get('/namespaces/'+namespace+'/pods/'+name)).then(unwrap);

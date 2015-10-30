@@ -39,6 +39,9 @@ angular.module('k8s-manager.overview', ['ui.bootstrap', 'k8s-manager.api', 'k8s-
       }
       $scope.$on('pods-changed', reloadData);
       $scope.$on('auto-reload', reloadData);
+      $scope.podOrder = function(pod) {
+        return new Date(pod.metadata.creationTimestamp);
+      };
   }])
 
   .controller('DashboardMenuCtrl', ['$scope', '$stateParams', 'namespaces', 'quotas',

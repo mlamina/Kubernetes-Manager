@@ -6,14 +6,16 @@
     <thead>
     <th>Status</th>
     <th>Started</th>
+    <th>Ready</th>
     <th>Name</th>
     <th>Labels</th>
     <th>Containers</th>
     </thead>
     <tbody>
-    <tr ng-repeat="pod in pods">
+    <tr ng-repeat="pod in pods | orderBy:podOrder:true">
       <td><span pod-status></span></td>
       <td><span am-time-ago="pod.metadata.creationTimestamp"></span></td>
+      <td>{{ pod.containersReady }} / {{ pod.status.containerStatuses.length }}</td>
       <td><a href="" ng-click="openModal(pod)">{{pod.metadata.name}}</a></td>
       <td><span ng-repeat="(key,value) in pod.metadata.labels" class="label label-primary" style="margin-right: 2px">{{value}}</span></td>
       <td><span ng-repeat="container in pod.spec.containers"><span class="label label-default" style="margin-right: 2px">{{container.name}}</span></span></td>
