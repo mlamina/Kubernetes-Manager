@@ -3,11 +3,59 @@
     <h1>{{ nodeName }} <small>{{ details.num_cores }} Cores, {{ details.memory_capacity / 1024/1024/1024 | number:2}} GB</small></h1>
   </div>
   <div class="row">
-    <div class="col-md-3">
-      {{ details | json }}
+
+    <!-- Node containers -->
+    <div class="col-md-6">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Containers</h3>
+        </div>
+        <!--{{ containers | json }}-->
+        <ul class="list-group">
+          <li ng-repeat="container in containers.subcontainers" class="list-group-item">{{container.name}}</li>
+        </ul>
+      </div>
     </div>
-    <div class="col-md-3">
-      {{ containers | json }}
+
+    <!-- Node volumes -->
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">File Systems</h3>
+        </div>
+        <table class="table table-striped"  >
+          <thead>
+          <th>Device</th>
+          <th>Capacity</th>
+          <th style="text-align: center">Usage</th>
+          </thead>
+          <tbody>
+          <tr ng-repeat="fs in details.filesystems | orderBy: 'capacity': true">
+            <td>{{ fs.device }}</td>
+            <td style="width: 80px; text-align: right"><span style="width: 200px;">{{ fs.capacity | bytes }}</span></td>
+            <td>
+              <uib-progressbar
+                      value="fsStats[fs.device].percentage"
+                      ng-if="fsStats[fs.device]"
+                      type="{{fsStats[fs.device].type}}"
+                      style="width: 100px; margin-bottom: 0 !important;" >
+                <span ng-if="fsStats[fs.device].type!=='success'">{{ fsStats[fs.device].percentage | number: 1 }} %</span>
+              </uib-progressbar>
+              <!--<div class="progress" style="width: 100px; margin-bottom: 0 !important;" ng-if="fsStats[fs.device]">-->
+                <!--<div class="progress-bar"-->
+                     <!--role="progressbar"-->
+                     <!--aria-valuenow="60"-->
+                     <!--aria-valuemin="0"-->
+                     <!--style="width: {{ fsStats[fs.device].capacity / fsStats[fs.device].usage }}%; min-width: 3em;"-->
+                     <!--aria-valuemax="100">-->
+                  <!--{{ fsStats[fs.device].capacity / fsStats[fs.device].usage | number: 1 }} %-->
+                <!--</div>-->
+              <!--</div>-->
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
