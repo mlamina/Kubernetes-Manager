@@ -1,0 +1,13 @@
+<div class="col-md-12 main container-fluid">
+  <div class="page-header">
+    <h1>{{ nodeName }} <small>{{ details.num_cores }} Cores, {{ details.memory_capacity / 1024/1024/1024 | number:2}} GB</small></h1>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+      {{ details | json }}
+    </div>
+    <div class="col-md-3">
+      {{ containers | json }}
+    </div>
+  </div>
+</div>

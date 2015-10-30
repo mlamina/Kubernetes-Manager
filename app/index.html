@@ -20,7 +20,7 @@
 
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
   <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="bower_components/components-font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="app.css">
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
@@ -52,13 +52,13 @@
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li ng-controller="AutoReloadController"><a href="" ng-click="toggleAutoReload()">
-          <span ng-if="autoReloadActivated"><i class="fa fa-refresh fa-spin"></i> Auto Reload: <b>ON</b></span>
+          <span ng-if="autoReloadActivated"><i class="fa fa-refresh fa-spin"></i> Auto Reload: <strong><span style="color: green">ON</span></strong></span>
           <span ng-if="!autoReloadActivated"><i class="fa fa-refresh"></i> Auto Reload: OFF</span>
         </a></li>
-        <li><a href="#/dashboard"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Dashboard</a></li>
+        <li class="{active: $state.includes('dashboard')}"><a href="#/dashboard"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Dashboard</a></li>
         <li><a href="#/events"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Events</a></li>
-        <li><a href="#/resources"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Nodes</a></li>
-        <li><a href="#/explore">About</a></li>
+        <li><a href="" ui-sref="nodes.all"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Nodes</a></li>
+        <li><a href="#/about"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
       </ul>
     </div>
   </div>
@@ -104,6 +104,10 @@
 <script src="components/modals/pod.modal.js"></script>
 <script src="components/dashboard/dashboard.js"></script>
 <script src="components/events/events.js"></script>
+
+<script src="components/nodes/_module.js"></script>
+<script src="components/nodes/nodes.js"></script>
+<script src="components/nodes/node-detail.js"></script>
 
 <script src="app.js"></script>
 <script src="components/version/version.js"></script>

@@ -55,11 +55,7 @@
 
     <h4>Logs</h4>
     <div class="well well-sm">
-      <table class="table table-condensed">
-        <tr ng-repeat="line in log.lines">
-          <td>{{ line }}</td>
-        </tr>
-      </table>
+      <samp ng-repeat="line in log.lines">{{ line }}<br></samp>
     </div>
 
   </div>

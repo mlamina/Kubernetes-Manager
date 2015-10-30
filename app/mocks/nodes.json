@@ -1,0 +1,275 @@
+{
+  "kind": "NodeList",
+  "apiVersion": "v1",
+  "metadata": {
+    "selfLink": "/api/v1/nodes",
+    "resourceVersion": "4890148"
+  },
+  "items": [
+    {
+      "metadata": {
+        "name": "kubernetes-master",
+        "selfLink": "/api/v1/nodes/kubernetes-master",
+        "uid": "6914a42e-3cef-11e5-9e70-42010af061aa",
+        "resourceVersion": "4890143",
+        "creationTimestamp": "2015-08-07T10:31:06Z",
+        "labels": {
+          "kubernetes.io/hostname": "kubernetes-master"
+        }
+      },
+      "spec": {
+        "podCIDR": "10.244.0.0/24",
+        "externalID": "10655022754166174435",
+        "providerID": "gce://kubernetes-experiement/europe-west1-b/kubernetes-master"
+      },
+      "status": {
+        "capacity": {
+          "cpu": "1",
+          "memory": "3800808Ki",
+          "pods": "40"
+        },
+        "conditions": [
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastHeartbeatTime": "2015-10-25T21:21:11Z",
+            "lastTransitionTime": "2015-08-07T10:31:05Z",
+            "reason": "kubelet is posting ready status"
+          }
+        ],
+        "addresses": [
+          {
+            "type": "InternalIP",
+            "address": "10.240.97.170"
+          },
+          {
+            "type": "ExternalIP",
+            "address": "130.111.109.333"
+          }
+        ],
+        "nodeInfo": {
+          "machineID": "",
+          "systemUUID": "DE9CB684-3854-CD0D-2EB8-DBFA13685D7F",
+          "bootID": "4e5d9008-0459-4303-94a8-01d1f768d7b5",
+          "kernelVersion": "3.16.0-0.bpo.4-amd64",
+          "osImage": "Debian GNU/Linux 7 (wheezy)",
+          "containerRuntimeVersion": "docker://1.6.2",
+          "kubeletVersion": "v1.0.3-dirty",
+          "kubeProxyVersion": "v1.0.3-dirty"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "kubernetes-minion-uvhg",
+        "selfLink": "/api/v1/nodes/kubernetes-minion-group-large-uvhg",
+        "uid": "9767adf8-4b35-11e5-b2cf-42010af061aa",
+        "resourceVersion": "4890147",
+        "creationTimestamp": "2015-08-25T14:28:45Z",
+        "labels": {
+          "kubernetes.io/hostname": "kubernetes-minion-group-large-uvhg"
+        }
+      },
+      "spec": {
+        "podCIDR": "10.244.3.0/24",
+        "externalID": "10767699493360162914",
+        "providerID": "gce://kubernetes-experiement/europe-west1-b/kubernetes-minion-group-large-uvhg"
+      },
+      "status": {
+        "capacity": {
+          "cpu": "4",
+          "memory": "15437216Ki",
+          "pods": "40"
+        },
+        "conditions": [
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastHeartbeatTime": "2015-10-25T21:21:14Z",
+            "lastTransitionTime": "2015-09-16T13:42:40Z",
+            "reason": "kubelet is posting ready status"
+          }
+        ],
+        "addresses": [
+          {
+            "type": "InternalIP",
+            "address": "10.240.232.56"
+          },
+          {
+            "type": "ExternalIP",
+            "address": "104.111.3.333"
+          }
+        ],
+        "nodeInfo": {
+          "machineID": "",
+          "systemUUID": "6DE48788-CF1A-E7B2-2B7C-7665F747DD13",
+          "bootID": "343e2ec0-f3fd-44a5-8229-1a9aeeec5752",
+          "kernelVersion": "3.16.0-0.bpo.4-amd64",
+          "osImage": "Debian GNU/Linux 7 (wheezy)",
+          "containerRuntimeVersion": "docker://Unknown",
+          "kubeletVersion": "v1.0.3-dirty",
+          "kubeProxyVersion": "v1.0.3-dirty"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "kubernetes-minion-i488",
+        "selfLink": "/api/v1/nodes/kubernetes-minion-i488",
+        "uid": "13beed67-4b35-11e5-b2cf-42010af061aa",
+        "resourceVersion": "4890148",
+        "creationTimestamp": "2015-08-25T14:25:04Z",
+        "labels": {
+          "kubernetes.io/hostname": "kubernetes-minion-i488"
+        }
+      },
+      "spec": {
+        "podCIDR": "10.244.1.0/24",
+        "externalID": "17316166339775708251",
+        "providerID": "gce://kubernetes-experiement/europe-west1-b/kubernetes-minion-i488"
+      },
+      "status": {
+        "capacity": {
+          "cpu": "1",
+          "memory": "3800808Ki",
+          "pods": "40"
+        },
+        "conditions": [
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastHeartbeatTime": "2015-10-25T21:21:16Z",
+            "lastTransitionTime": "2015-09-14T16:55:49Z",
+            "reason": "kubelet is posting ready status"
+          }
+        ],
+        "addresses": [
+          {
+            "type": "InternalIP",
+            "address": "10.240.4.105"
+          },
+          {
+            "type": "ExternalIP",
+            "address": "111.155.333.222"
+          }
+        ],
+        "nodeInfo": {
+          "machineID": "",
+          "systemUUID": "D52ABB22-A06C-3D90-B1E6-53F65DDB95D8",
+          "bootID": "92c059bc-e8ed-4a31-8724-7d5a4fc89f8a",
+          "kernelVersion": "3.16.0-0.bpo.4-amd64",
+          "osImage": "Debian GNU/Linux 7 (wheezy)",
+          "containerRuntimeVersion": "docker://Unknown",
+          "kubeletVersion": "v1.0.3-dirty",
+          "kubeProxyVersion": "v1.0.3-dirty"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "kubernetes-minion-u0yq",
+        "selfLink": "/api/v1/nodes/kubernetes-minion-u0yq",
+        "uid": "53a42e73-4b26-11e5-b2cf-42010af061aa",
+        "resourceVersion": "4890144",
+        "creationTimestamp": "2015-08-25T12:39:28Z",
+        "labels": {
+          "kubernetes.io/hostname": "kubernetes-minion-u0yq"
+        }
+      },
+      "spec": {
+        "podCIDR": "10.244.2.0/24",
+        "externalID": "9645771067932742267",
+        "providerID": "gce://kubernetes-experiement/europe-west1-b/kubernetes-minion-u0yq"
+      },
+      "status": {
+        "capacity": {
+          "cpu": "1",
+          "memory": "3800808Ki",
+          "pods": "40"
+        },
+        "conditions": [
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastHeartbeatTime": "2015-10-25T21:21:12Z",
+            "lastTransitionTime": "2015-08-25T12:40:08Z",
+            "reason": "kubelet is posting ready status"
+          }
+        ],
+        "addresses": [
+          {
+            "type": "InternalIP",
+            "address": "10.240.188.101"
+          },
+          {
+            "type": "ExternalIP",
+            "address": "444.148.222.123"
+          }
+        ],
+        "nodeInfo": {
+          "machineID": "",
+          "systemUUID": "A6E63224-FDFB-D900-0581-E6B950589D71",
+          "bootID": "5f58e999-28e6-427a-b8dc-52af0380439c",
+          "kernelVersion": "3.16.0-0.bpo.4-amd64",
+          "osImage": "Debian GNU/Linux 7 (wheezy)",
+          "containerRuntimeVersion": "docker://Unknown",
+          "kubeletVersion": "v1.0.3-dirty",
+          "kubeProxyVersion": "v1.0.3-dirty"
+        }
+      }
+    },
+    {
+      "metadata": {
+        "name": "kubernetes-minion-yykz",
+        "selfLink": "/api/v1/nodes/kubernetes-minion-yykz",
+        "uid": "5250c859-4b26-11e5-b2cf-42010af061aa",
+        "resourceVersion": "4890145",
+        "creationTimestamp": "2015-08-25T12:39:26Z",
+        "labels": {
+          "kubernetes.io/hostname": "kubernetes-minion-yykz"
+        }
+      },
+      "spec": {
+        "podCIDR": "10.244.4.0/24",
+        "externalID": "13863265125970921102",
+        "providerID": "gce://kubernetes-experiement/europe-west1-b/kubernetes-minion-yykz"
+      },
+      "status": {
+        "capacity": {
+          "cpu": "1",
+          "memory": "3800808Ki",
+          "pods": "40"
+        },
+        "conditions": [
+          {
+            "type": "Ready",
+            "status": "True",
+            "lastHeartbeatTime": "2015-10-25T21:21:13Z",
+            "lastTransitionTime": "2015-09-14T16:55:39Z",
+            "reason": "kubelet is posting ready status"
+          }
+        ],
+        "addresses": [
+          {
+            "type": "InternalIP",
+            "address": "10.240.27.50"
+          },
+          {
+            "type": "ExternalIP",
+            "address": "123.155.312.444"
+          }
+        ],
+        "nodeInfo": {
+          "machineID": "",
+          "systemUUID": "671DE51E-06B6-402B-7008-7287435615B0",
+          "bootID": "6e67189f-29ae-4d18-a6f6-cf4db7ab6b95",
+          "kernelVersion": "3.16.0-0.bpo.4-amd64",
+          "osImage": "Debian GNU/Linux 7 (wheezy)",
+          "containerRuntimeVersion": "docker://1.6.2",
+          "kubeletVersion": "v1.0.3-dirty",
+          "kubeProxyVersion": "v1.0.3-dirty"
+        }
+      }
+    }
+  ]
+}

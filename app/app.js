@@ -8,10 +8,11 @@ angular.module('k8s-manager', [
   'k8s-manager.api',
   'k8s-manager.overview',
   'k8s-manager.events',
+  'k8s-manager.nodes',
   'k8s-manager.version',
   'k8s-manager.constants'
-]).
-config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+])
+  .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/dashboard/default");
     $stateProvider
       .state('dashboard-base', {
@@ -66,9 +67,37 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
             return Events.queryAll();
           }
         }
+      })
+      .state('nodes', {
+        url: "/nodes",
+        abstract: true,
+        templateUrl: "components/nodes/viewport.html"
+      })
+      .state('nodes.all', {
+        url: "/gad",
+        templateUrl: "components/nodes/nodes.html",
+        controller: 'NodesCtrl',
+        resolve: {
+          nodes: function(Nodes) {
+            return Nodes.queryAll();
+          }
+        }
+      })
+      .state('nodes.detail', {
+        url: "/:name",
+        templateUrl: "components/nodes/node-detail.html",
+        controller: 'NodeDetailCtrl',
+        resolve: {
+          containers: function(Nodes, $stateParams) {
+            return Nodes.getContainers($stateParams.name);
+          },
+          details: function(Nodes, $stateParams) {
+            return Nodes.getDetails($stateParams.name);
+          }
+        }
       });
 
-}])
+  }])
   .controller('AutoReloadController', ['$rootScope', '$scope', '$interval', function($rootScope, $scope, $interval) {
     $scope.autoReloadActivated = true;
     var autoReload;
@@ -85,4 +114,4 @@ config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRou
       setAutoReloadInterval();
     };
     setAutoReloadInterval();
-   }]);
+  }]);

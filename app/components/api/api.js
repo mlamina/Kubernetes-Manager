@@ -63,4 +63,18 @@ angular.module('k8s-manager.api')
         ).then(unwrap);
       }
     };
+  }])
+  .factory('Nodes', ['$http', 'UrlResolver', function($http, url) {
+
+    return {
+      queryAll: function() {
+        return $http.get(url.get('/nodes')).then(unwrapItems);
+      },
+      getDetails: function(name) {
+        return $http.get(url.get('/proxy/nodes/'+name+':4194/api/v1.0/machine')).then(unwrap);
+      },
+      getContainers: function(name) {
+        return $http.get(url.get('/proxy/nodes/'+name+':4194/api/v1.0/containers')).then(unwrap);
+      },
+    };
   }]);

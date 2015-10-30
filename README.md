@@ -30,6 +30,8 @@ Kubernetes Manager is meant to be run as a Kubernetes
 
 You need a running Kubernetes cluster. See [kubernetes.io](http://kubernetes.io/) for details.
 
+IMPORTANT: (Heapster monitoring)[https://github.com/kubernetes/heapster] needs to be enabled!
+
 ### Copy the .yml files to your Kubernetes Master
  
 TODO
