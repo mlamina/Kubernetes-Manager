@@ -44,8 +44,9 @@ angular.module('k8s-manager.overview', ['ui.bootstrap', 'k8s-manager.api', 'k8s-
       };
   }])
 
-  .controller('DashboardMenuCtrl', ['$scope', '$stateParams', 'namespaces', 'quotas',
-    function($scope, $stateParams, namespaces, quotas) {
+  .controller('DashboardMenuCtrl', ['$scope', '$stateParams', 'namespaces', 'quotas', '$state',
+    function($scope, $stateParams, namespaces, quotas, $state) {
+      $scope.state = $state;
       $scope.current_namespace = $stateParams.namespace;
       $scope.namespaces = namespaces;
       $scope.quotas = quotas;

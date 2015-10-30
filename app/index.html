@@ -50,15 +50,15 @@
       <li><a class="navbar-brand" href="#">Kubernetes Manager</a></li>
     </ul>
     <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" ng-controller="AppMenuController">
         <li ng-controller="AutoReloadController"><a href="" ng-click="toggleAutoReload()">
           <span ng-if="autoReloadActivated"><i class="fa fa-refresh fa-spin"></i> Auto Reload: <strong><span style="color: green">ON</span></strong></span>
           <span ng-if="!autoReloadActivated"><i class="fa fa-refresh"></i> Auto Reload: OFF</span>
         </a></li>
-        <li class="{active: $state.includes('dashboard')}"><a href="#/dashboard"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Dashboard</a></li>
-        <li><a href="#/events"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Events</a></li>
-        <li><a href="" ui-sref="nodes.all"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Nodes</a></li>
-        <li><a href="#/about"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
+        <li ui-sref-active="active"><a ui-sref="dashboard({namespace:'default'})"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Dashboard</a></li>
+        <li ui-sref-active="active"><a ui-sref="events"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Events</a></li>
+        <li ui-sref-active="active"><a ui-sref="nodes.all"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Nodes</a></li>
+        <li ui-sref-active="active"><a href="#/about"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
       </ul>
     </div>
   </div>

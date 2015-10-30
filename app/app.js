@@ -75,7 +75,7 @@ angular.module('k8s-manager', [
         templateUrl: "components/nodes/viewport.html"
       })
       .state('nodes.all', {
-        url: "/gad",
+        url: "/all",
         templateUrl: "components/nodes/nodes.html",
         controller: 'NodesCtrl',
         resolve: {
@@ -115,6 +115,9 @@ angular.module('k8s-manager', [
       setAutoReloadInterval();
     };
     setAutoReloadInterval();
+  }])
+  .controller('AppMenuController', ['$state', '$scope', function($state, $scope) {
+
   }])
   .filter('bytes', function() {
     return function(bytes, precision) {
