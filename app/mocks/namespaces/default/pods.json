@@ -108,7 +108,7 @@
               }
             },
             "lastState": {},
-            "ready": true,
+            "ready": false,
             "restartCount": 0,
             "image": "pires/elasticsearch:data",
             "imageID": "docker://dd3e1a0e1b51a4df9fc27b1e646fec7303f08f0c10196fd0797ff5dac32fc5d7",

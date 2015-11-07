@@ -2,18 +2,19 @@
 
 // Declare app level module which depends on views, and components
 angular.module('k8s-manager', [
-  'ngAnimate',
-  'ui.bootstrap',
-  'ui.router',
-  'angularMoment',
-  'nvd3ChartDirectives',
-  'k8s-manager.api',
-  'k8s-manager.overview',
-  'k8s-manager.events',
-  'k8s-manager.nodes',
-  'k8s-manager.version',
-  'k8s-manager.constants'
-])
+    'ngAnimate',
+    'ui.bootstrap',
+    'ui.router',
+    'angularMoment',
+    'nvd3ChartDirectives',
+    'k8s-manager.api',
+    'k8s-manager.overview',
+    'k8s-manager.events',
+    'k8s-manager.nodes',
+    'k8s-manager.version',
+    'k8s-manager.constants',
+    'k8s-manager.about'
+  ])
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
     $urlRouterProvider.otherwise("/dashboard/default");
     $stateProvider
@@ -97,6 +98,11 @@ angular.module('k8s-manager', [
             return Nodes.getDetails($stateParams.name);
           }
         }
+      })
+      .state('about', {
+        url: "/about",
+        templateUrl: "components/about/about.html",
+        controller: 'AboutCtrl'
       });
 
   }])

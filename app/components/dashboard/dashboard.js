@@ -60,8 +60,14 @@ angular.module('k8s-manager.overview', ['ui.bootstrap', 'k8s-manager.api', 'k8s-
         var phase = scope.pod.status.phase;
         element.text(phase);
         element.addClass('label');
-        if (phase === 'Running') element.addClass('label-success');
-        else if (phase === 'Waiting') element.addClass('label-info');
+        if (phase === 'Running') {
+          if (scope.pod.containersReady === 0)
+            element.addClass('label-danger')
+          else if (scope.pod.containersReady < scope.pod.status.containerStatuses.length)
+            element.addClass('label-warning');
+          else
+            element.addClass('label-success');
+        } else if (phase === 'Waiting') element.addClass('label-info');
         else if (phase === 'Pending') element.addClass('label-info');
         else element.addClass('label-default');
       }

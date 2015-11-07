@@ -1,22 +1,22 @@
-<div class="col-sm-3 col-md-2 sidebar" ui-view="menu">
-</div>
-<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main container-fluid">
-  <div class="row">
-    <!-- RCs -->
-    <div class="col-md-6">
-      <div ui-view="rc"></div>
+<div class="row">
+  <div class="col-sm-3 col-md-2 sidebar" ui-view="menu">
+  </div>
+  <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main container-fluid">
+    <div class="row">
+      <!-- RCs -->
+      <div class="col-md-6">
+        <div ui-view="rc"></div>
+      </div>
+      <!-- Services -->
+      <div class="col-md-6">
+        <div ui-view="services"></div>
+      </div>
     </div>
-    <!-- Services -->
-    <div class="col-md-6">
-      <div ui-view="services"></div>
+    <div class="row">
+      <!-- Pods -->
+      <div class="col-md-12">
+        <div ui-view="pods"></div>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <!-- Pods -->
-    <div class="col-md-12">
-      <div ui-view="pods"></div>
-    </div>
-  </div>
 </div>
-
-

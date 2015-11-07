@@ -60,17 +60,33 @@
           <span ng-if="autoReloadActivated"><i class="fa fa-refresh fa-spin"></i> Auto Reload: <strong><span style="color: green">ON</span></strong></span>
           <span ng-if="!autoReloadActivated"><i class="fa fa-refresh"></i> Auto Reload: OFF</span>
         </a></li>
-        <li ng-class="{active: state.includes('dashboard')}"><a ui-sref="dashboard({namespace:'default'})"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> Dashboard</a></li>
-        <li ui-sref-active="active"><a ui-sref="events"><span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Events</a></li>
-        <li ng-class="{active: state.includes('nodes')}"><a ui-sref="nodes.all"><span class="glyphicon glyphicon-th" aria-hidden="true"></span> Nodes</a></li>
-        <li ui-sref-active="active"><a href="#/about"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About</a></li>
+        <li ng-class="{active: state.includes('dashboard')}">
+          <a ui-sref="dashboard({namespace:'default'})">
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Dashboard
+          </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="events">
+            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Events
+          </a>
+        </li>
+        <li ng-class="{active: state.includes('nodes')}">
+          <a ui-sref="nodes.all">
+            <span class="glyphicon glyphicon-th" aria-hidden="true"></span> Nodes
+          </a>
+        </li>
+        <li ui-sref-active="active">
+          <a ui-sref="about">
+            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
+          </a>
+        </li>
       </ul>
     </div>
   </div>
 </nav>
 
-<div class="container-fluid">
-  <div class="row" ui-view>
+<div class="container-fluid main">
+  <div ui-view>
 
   </div>
 </div>
@@ -119,6 +135,8 @@
 <script src="components/nodes/_module.js"></script>
 <script src="components/nodes/nodes.js"></script>
 <script src="components/nodes/node-detail.js"></script>
+
+<script src="components/about/about.js"></script>
 
 <script src="app.js"></script>
 <script src="components/version/version.js"></script>
