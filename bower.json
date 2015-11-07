@@ -1,23 +1,30 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
+  "name": "k8s-manager",
+  "description": "A simple web frontend for your Kubernetes cluster",
   "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
-  "license": "MIT",
+  "homepage": "https://github.com/mlamina/kubernetes-manager",
+  "license": "GPL",
   "private": true,
   "dependencies": {
-    "angular": "~1.4.5",
-    "angular-route": "~1.4.5",
-    "angular-animate": "~1.4.5",
-    "angular-resource": "~1.4.5",
-    "angular-loader": "~1.4.5",
-    "angular-mocks": "~1.4.5",
+    "angular": "~1.4.7",
+    "angular-route": "~1.4.7",
+    "angular-animate": "~1.4.7",
+    "angular-resource": "~1.4.7",
+    "angular-loader": "~1.4.7",
+    "angular-mocks": "~1.4.7",
     "angular-bootstrap": "~0.14.3",
     "html5-boilerplate": "~5.2.0",
     "angular-moment": "~0.10.3",
-    "n3-line-chart": "~1.1.12"
+    "d3": "~3.5.6",
+    "nvd3": "~1.8.1",
+    "angularjs-nvd3-directives": "~0.0.7"
   },
   "devDependencies": {
     "components-font-awesome": "~4.4.0"
+  },
+  "resolutions": {
+    "angular": "1.4.7",
+    "d3": "^3.4.4",
+    "nvd3": "~1.8.1"
   }
 }

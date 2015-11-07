@@ -47,3 +47,12 @@ to your Kubernetes Manager here:
 
 Kubernetes Manager is built using [AngularJS](https://angularjs.org/). Please feel free to fork this repository,
 ask me questions or submit pull requests!
+
+### TODOs
+
+* Write proper unit tests
+* Write end-to-end tests
+* Configure Grunt build process for JS and CSS minification
+* Create modal detail views for resource controllers
+* Create modal detail views for services
+* Make resource controllers scalable with slider

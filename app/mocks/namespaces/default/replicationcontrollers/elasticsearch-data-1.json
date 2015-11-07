@@ -1,0 +1,92 @@
+{
+  "kind": "ReplicationController",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "elasticsearch-data-1",
+    "namespace": "default",
+    "selfLink": "/api/v1/namespaces/default/replicationcontrollers/elasticsearch-data-1",
+    "uid": "9d2351e9-4b3c-11e5-b2cf-42010af061aa",
+    "resourceVersion": "2906603",
+    "generation": 2,
+    "creationTimestamp": "2015-08-25T15:19:01Z",
+    "labels": {
+      "app": "elasticsearch",
+      "instance": "first",
+      "role": "data"
+    }
+  },
+  "spec": {
+    "replicas": 1,
+    "selector": {
+      "app": "elasticsearch",
+      "instance": "first",
+      "role": "data"
+    },
+    "template": {
+      "metadata": {
+        "creationTimestamp": null,
+        "labels": {
+          "app": "elasticsearch",
+          "instance": "first",
+          "role": "data"
+        }
+      },
+      "spec": {
+        "volumes": [
+          {
+            "name": "storage",
+            "gcePersistentDisk": {
+              "pdName": "elasticsearch-disk-1",
+              "fsType": "ext4"
+            }
+          }
+        ],
+        "containers": [
+          {
+            "name": "elasticsearch-data",
+            "image": "pires/elasticsearch:data",
+            "ports": [
+              {
+                "name": "transport",
+                "containerPort": 9300,
+                "protocol": "TCP"
+              }
+            ],
+            "env": [
+              {
+                "name": "KUBERNETES_TRUST_CERT",
+                "value": "true"
+              },
+              {
+                "name": "ES_HEAP_SIZE",
+                "value": "960m"
+              }
+            ],
+            "resources": {
+              "limits": {
+                "cpu": "300m",
+                "memory": "1Gi"
+              }
+            },
+            "volumeMounts": [
+              {
+                "name": "storage",
+                "mountPath": "/data"
+              }
+            ],
+            "terminationMessagePath": "/dev/termination-log",
+            "imagePullPolicy": "IfNotPresent"
+          }
+        ],
+        "restartPolicy": "Always",
+        "dnsPolicy": "ClusterFirst",
+        "serviceAccountName": "elasticsearch",
+        "serviceAccount": "elasticsearch"
+      }
+    }
+  },
+  "status": {
+    "replicas": 1,
+    "observedGeneration": 2
+  }
+}

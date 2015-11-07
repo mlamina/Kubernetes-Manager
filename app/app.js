@@ -6,7 +6,7 @@ angular.module('k8s-manager', [
   'ui.bootstrap',
   'ui.router',
   'angularMoment',
-  'n3-line-chart',
+  'nvd3ChartDirectives',
   'k8s-manager.api',
   'k8s-manager.overview',
   'k8s-manager.events',

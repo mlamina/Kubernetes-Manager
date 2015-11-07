@@ -134,3 +134,7 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
+
+#memoryChart .nv-pie-title {
+  fill: gray;
+}

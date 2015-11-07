@@ -14,9 +14,12 @@ angular.module('k8s-manager.overview', ['ui.bootstrap', 'k8s-manager.api', 'k8s-
       $scope.$on('auto-reload', reloadData);
     }])
 
-  .controller('RcResourceController', ['$scope','namespaceReplicationControllers', 'ReplicationControllers', '$stateParams',
-    function($scope, namespaceReplicationControllers, ReplicationControllers, $stateParams) {
+  .controller('RcResourceController', ['$scope','namespaceReplicationControllers', 'ReplicationControllers', '$stateParams', 'Modals',
+    function($scope, namespaceReplicationControllers, ReplicationControllers, $stateParams, Modals) {
       $scope.rcs = namespaceReplicationControllers;
+      $scope.openModal = function(rc) {
+        Modals.openRcModal($stateParams.namespace, rc.metadata.name);
+      };
       function reloadData() {
         ReplicationControllers.byNamespace($stateParams.namespace).then(function(rcs) {
           $scope.rcs = rcs;

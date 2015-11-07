@@ -43,7 +43,13 @@ angular.module('k8s-manager.api')
     return {
       byNamespace: function(namespace) {
         return $http.get(url.get('/namespaces/'+namespace+'/replicationcontrollers')).then(unwrapItems);
-      }
+      },
+      getRc: function(namespace, name) {
+        return $http.get(url.get('/namespaces/'+namespace+'/replicationcontrollers/'+name)).then(unwrap);
+      },
+      deleteRc: function(namespace, name) {
+        return $http.delete(url.get('/namespaces/'+namespace+'/replicationcontrollers/'+name)).then(unwrap);
+      },
     };
   }])
   .factory('Pods', ['$http', 'UrlResolver', function($http, url) {

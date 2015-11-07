@@ -2,8 +2,8 @@
 
 angular.module('k8s-manager.nodes')
 
-  .controller('NodeDetailCtrl', ['$scope', '$stateParams', 'Nodes', 'details', 'containers',
-    function($scope, $stateParams, Nodes, details, containers) {
+  .controller('NodeDetailCtrl', ['$scope', '$stateParams', '$filter', 'Nodes', 'details', 'containers',
+    function($scope, $stateParams, $filter, Nodes, details, containers) {
       $scope.nodeName = $stateParams.name;
       $scope.details = details;
       $scope.containers = containers;
@@ -38,63 +38,56 @@ angular.module('k8s-manager.nodes')
 
       $scope.$watch('containers', function(newValue, oldValue) {
         configureCpuChart();
+        configureMemoryChart();
       });
+
+      //$scope.xAxisTickFormat = function(d) {
+      //  return d3.time.format('%b %d')(new Date(d));
+      //};
 
       function configureCpuChart() {
         // Configure CPU chart
-        $scope.cpuChartData = [];
+        var cpuChartData = [];
         var cpuCapacityPerSecond = $scope.details.num_cores * 1000000000; // cores * nanoseconds
         for (var i = 1; i < $scope.containers.stats.length; i++) {
           var cpuUsage = $scope.containers.stats[i].cpu.usage.total - $scope.containers.stats[i - 1].cpu.usage.total;
-          $scope.cpuChartData.push({
-            date: new Date($scope.containers.stats[i].timestamp),
-            cpuUsage: (cpuUsage / cpuCapacityPerSecond) * 100,
-            memoryUsage: ($scope.containers.stats[i].memory.usage / $scope.details.memory_capacity) * 100
-          });
+          var currentUsage = (cpuUsage / cpuCapacityPerSecond) * 100;
+          cpuChartData.push([new Date($scope.containers.stats[i].timestamp), currentUsage]);
         }
-        $scope.cpuChartOptions = {
-          axes: {
-            x: {key: 'date', type: 'date', thickness: '2px', ticks: 3},
-            y: {type: 'linear', min: 0, max: 100, ticks: 5, innerTicks: true, grid: true}
-          },
-          margin: {
-            left: 30,
-            right: 20,
-            bottom: 30
-          },
-          series: [
-            {
-              y: 'cpuUsage',
-              color: 'steelblue',
-              thickness: '2px',
-              type: 'line',
-              striped: false,
-              label: 'CPU Utilization',
-              drawDots: false
-            },
-            {
-              y: 'memoryUsage',
-              color: '#FF6633',
-              thickness: '1px',
-              type: 'area',
-              striped: false,
-              label: 'Memory Utilization',
-              drawDots: false
-            }
-          ],
-          lineMode: 'linear',
-          tension: 0.7,
-          tooltip: {
-            mode: 'scrubber',
-            formatter: function (x, y, series) {
-              return series.label + ': ' + Math.round(y) + '%';
-            }
-          },
-          drawLegend: false,
-          drawDots: false,
-          hideOverflow: false,
-          columnsHGap: 5
-        }
+        $scope.cpuChartData = [{ key: "CPU", values: cpuChartData }];
       }
+
+      function configureMemoryChart() {
+        var usage = $scope.containers.stats[$scope.containers.stats.length-1].memory.usage;
+        var capacity = $scope.details.memory_capacity;
+        $scope.memoryChartData = [
+          { label: "Free", value: capacity - usage, color: '#66CC00'},
+          { label: "Used", value: usage, color: '#CC3300'}
+        ];
+        nv.addGraph(function() {
+          var chart = nv.models.pieChart()
+            .x(function(d) { return d.label })
+            .y(function(d) { return d.value })
+            .showLegend(false)
+            .margin({
+              left: 0,
+              right: 0,
+              top: 0,
+              bottom: 0
+            })
+            .donut(true)
+            .donutRatio(0.45)
+            .labelType("percent")
+            .showLabels(false);
+          chart.title(Math.round(usage / capacity * 100) + "%");
+          d3.select("#memoryChart svg")
+            .datum($scope.memoryChartData)
+            .transition().duration(1500)
+            .call(chart);
+          return chart;
+        });
+
+      }
+      configureMemoryChart();
       configureCpuChart();
     }]);

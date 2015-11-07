@@ -3,19 +3,38 @@
     <h1>{{ nodeName }} <small>{{ details.num_cores }} Cores, {{ details.memory_capacity / 1024/1024/1024 | number:2}} GB</small></h1>
   </div>
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-8">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title" class="text-center"><i class="fa fa-line-chart"></i> CPU & Memory Utilization - {{ containers.stats.length }} seconds</h3>
+          <h3 class="panel-title" class="text-center"><i class="fa fa-line-chart"></i> CPU Utilization (60s)</h3>
         </div>
         <div class="panel-body">
-          <linechart data="cpuChartData" options="cpuChartOptions" mode="" width="" height="200"></linechart>
+          <nvd3-line-chart
+                  id="cpuChart"
+                  isArea="false"
+                  data="cpuChartData"
+                  forcey="[100]"
+                  interactive="false"
+                  margin="{left:25, top:10, bottom:10, right:10}"
+                  showYAxis="true"
+                  showXAxis="false">
+            <svg></svg>
+          </nvd3-line-chart>
         </div>
-
       </div>
-
     </div>
-
+    <div class="col-md-4">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title" class="text-center"><i class="fa fa-line-chart"></i> Memory Utilization</h3>
+        </div>
+        <div class="panel-body">
+          <div id="memoryChart">
+            <svg></svg>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="row">
 
