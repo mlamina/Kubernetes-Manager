@@ -23,8 +23,7 @@ you a quick overview of the health status of your Kubernetes cluster.
 
 ## Installation
 
-Kubernetes Manager is meant to be run as a Kubernetes
-[Cluster Addon](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons).
+Kubernetes Manager needs to be run through a kubernetes API server proxy in order to be able to access the API from the browser, much like the pre-installed "KubeUI".
 
 ### Prerequisites
 
@@ -32,16 +31,12 @@ You need a running Kubernetes cluster. See [kubernetes.io](http://kubernetes.io/
 
 IMPORTANT: (Heapster monitoring)[https://github.com/kubernetes/heapster] needs to be enabled!
 
-### Copy the .yml files to your Kubernetes Master
- 
-TODO
-
 ### Start Service and Resource Controller
 
 `cd` to the project root and execute `kubectl create -f k8s-manager`. After a few seconds, you should find the URL
 to your Kubernetes Manager here:
 
-`kubectl cluster-info`
+`https://[MASTER-IP-ADDRESS]/api/v1/proxy/namespaces/kube-system/services/k8s-manager`
 
 ## Development
 

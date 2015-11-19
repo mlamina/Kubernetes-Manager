@@ -4,11 +4,10 @@ metadata:
   name: k8s-manager
   namespace: kube-system
   labels:
-    kubernetes.io/cluster-service: "true"
-    kubernetes.io/name: "K8sManager"
+    app: k8s-manager
 spec:
   ports:
     - port: 80
       targetPort: http
   selector:
-    k8s-app: k8s-manager
+    app: k8s-manager
