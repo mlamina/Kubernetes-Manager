@@ -60,8 +60,12 @@ angular.module('k8s-manager.api')
           .then(function(pods) {
             // Count ready containers
             angular.forEach(pods, function(pod) {
-              var readyContainers = pod.status.containerStatuses.filter(function(stat) { return stat.ready });
-              pod.containersReady = readyContainers.length;
+              if (pod.status.containerStatuses) {
+                var readyContainers = pod.status.containerStatuses.filter(function(stat) { return stat.ready });
+                pod.containersReady = readyContainers.length;
+              } else
+                pod.containersReady = 0;
+
             });
             return pods;
         });
