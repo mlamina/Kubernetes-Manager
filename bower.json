@@ -12,12 +12,12 @@
     "angular-resource": "~1.4.7",
     "angular-loader": "~1.4.7",
     "angular-mocks": "~1.4.7",
-    "angular-bootstrap": "~0.14.3",
     "html5-boilerplate": "~5.2.0",
     "angular-moment": "~0.10.3",
     "d3": "~3.5.6",
     "nvd3": "~1.8.1",
-    "angularjs-nvd3-directives": "~0.0.7"
+    "angularjs-nvd3-directives": "~0.0.7",
+    "angular-material": "^1.0.1"
   },
   "devDependencies": {
     "components-font-awesome": "~4.4.0"

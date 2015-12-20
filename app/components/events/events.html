@@ -1,40 +1,14 @@
-<div class="row">
-  <div class="col-md-12">
-    <form>
-      <div class="form-group">
-        <input type="search" class="form-control" placeholder="Search" ng-model="filterText">
-      </div>
-    </form>
-
-    <table class="table table-condensed"  >
-      <thead>
-      <th><span class="glyphicon glyphicon-time" aria-hidden="true"></span> Time</th>
-      <th>Source</th>
-      <th>Message</th>
-      <th>Involved Object</th>
-      <th>Type</th>
-      <th>Reason</th>
-      <th>NS</th>
-      </thead>
-      <tbody>
-      <tr ng-repeat="event in events | filter: filterText" ng-class="{ success: (event.reason=='created' || event.reason=='successfulCreate'), danger: event.reason=='killing'}">
-        <td>{{event.firstTimestamp | date: 'MMM d, HH:mm'}}</td>
-        <td>{{event.source.component}}</td>
-        <td>{{event.message}}</td>
-        <td>
-          <a href=""
-             ng-click="openPodModal(event.involvedObject.namespace, event.involvedObject.name)"
-             ng-if="event.involvedObject.kind==='Pod'">
-            {{event.involvedObject.name}}
-          </a>
-          <span ng-if="event.involvedObject.kind!=='Pod'">{{event.involvedObject.name}}</span>
-        </td>
-        <td><span class="label label-default">{{event.involvedObject.kind}}</span></td>
-        <td>{{event.reason}}</td>
-        <td><span class="label label-primary">{{event.metadata.namespace}}</span></td>
-      </tr>
-      </tbody>
-
-    </table>
-  </div>
-</div>
+<md-list>
+  <md-list-item flex>
+    <md-input-container flex>
+      <label>Filter</label>
+      <input type="search" placeholder="Filter" ng-model="filterText" >
+    </md-input-container>
+  </md-list-item>
+  <md-list-item ng-repeat="event in events | filter: filterText"  class="md-2-line" flex>
+    <div class="md-list-item-text">
+      <h3>{{event.message}}</h3>
+      <p>{{event.firstTimestamp | date: 'MMM d, HH:mm'}}</p>
+    </div>
+  </md-list-item>
+</md-list>

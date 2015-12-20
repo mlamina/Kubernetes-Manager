@@ -2,13 +2,14 @@
 
 // Declare app level module which depends on views, and components
 angular.module('k8s-manager', [
+    'ngMaterial',
     'ngAnimate',
-    'ui.bootstrap',
     'ui.router',
     'angularMoment',
     'nvd3ChartDirectives',
     'k8s-manager.api',
-    'k8s-manager.overview',
+    'k8s-manager.dashboard',
+    'k8s-manager.toolbar',
     'k8s-manager.events',
     'k8s-manager.nodes',
     'k8s-manager.version',
@@ -16,54 +17,76 @@ angular.module('k8s-manager', [
     'k8s-manager.about'
   ])
   .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
-    $urlRouterProvider.otherwise("/dashboard/default");
+    $urlRouterProvider.otherwise('/dashboard/default');
     $stateProvider
-      .state('dashboard-base', {
-        abstract: true,
-        templateUrl: "components/dashboard/dashboard.html"
-      })
-      .state('dashboard', {
-        parent: 'dashboard-base',
-        url: "/dashboard/:namespace",
+      .state('app', {
+        url: '',
+        templateUrl: 'components/toolbar/toolbar.html',
+        controller: 'ToolbarController',
         resolve: {
-          namespaceReplicationControllers: function(ReplicationControllers, $stateParams) {
-            return ReplicationControllers.byNamespace($stateParams.namespace);
-          },
           namespaces: function(Namespaces) {
             return Namespaces.queryAll();
-          },
-          quotas: function(ResourceQuotas) {
-            return ResourceQuotas.queryAll();
-          },
-          namespacePods: function(Pods, $stateParams) {
-            return Pods.byNamespace($stateParams.namespace);
-          },
-          namespaceServices: function(Services, $stateParams) {
-            return Services.byNamespace($stateParams.namespace);
-          }
-        },
-        views: {
-          menu: {
-            templateUrl: "components/dashboard/menu.html",
-            controller: 'DashboardMenuCtrl'
-          },
-          rc: {
-            templateUrl: "components/dashboard/rc.html",
-            controller: 'RcResourceController'
-          },
-          pods: {
-            templateUrl: "components/dashboard/pods.html",
-            controller: 'PodsResourceController'
-          },
-          services: {
-            templateUrl: "components/dashboard/services.html",
-            controller: 'ServiceResourceController'
           }
         }
       })
-      .state('events', {
-        url: "/events",
-        templateUrl: "components/events/events.html",
+      .state('app.dashboard', {
+        url: '/dashboard/:namespace',
+        templateUrl: 'components/dashboard/dashboard.html',
+        controller: 'DashboardController'
+      })
+      .state('app.dashboard.pods', {
+        url: '/pods',
+        templateUrl: 'components/dashboard/pods/overview.html',
+        controller: 'PodsResourceController',
+        resolve: {
+          pods: function(Pods, $stateParams) {
+            return Pods.byNamespace($stateParams.namespace);
+          }
+        }
+      })
+      .state('app.dashboard.pods.details', {
+        url: '/:name',
+        templateUrl: 'components/dashboard/pods/detail.html',
+        controller: 'PodsDetailController',
+        resolve: {
+          pod: function (Pods, $stateParams) {
+            return Pods.getPod($stateParams.namespace, $stateParams.name);
+          }
+        }
+      })
+      .state('app.dashboard.replicationcontrollers', {
+        url: '/replicationcontrollers',
+        templateUrl: 'components/dashboard/replicationcontrollers/overview.html',
+        controller: 'RcResourceController',
+        resolve: {
+          replicationControllers: function(ReplicationControllers, $stateParams) {
+            return ReplicationControllers.byNamespace($stateParams.namespace);
+          }
+        }
+      })
+      .state('app.dashboard.replicationcontrollers.details', {
+        url: '/:name',
+        templateUrl: 'components/dashboard/replicationcontrollers/detail.html',
+        controller: 'RcDetailController',
+        resolve: {
+          replicationController: function($stateParams) {
+            return ReplicationControllers.getRc($stateParams.namespace, $stateParams.name);
+          }
+        }
+      })
+      .state('app.dashboard.services', {
+        url: '/services',
+        templateUrl: 'components/dashboard/services/overview.html',
+        controller: 'ServiceResourceController',
+        resolve: {
+          services: function(Services, $stateParams) {
+            return Services.byNamespace($stateParams.namespace);
+          }
+        }
+      })
+      .state('app.events', {
+        url: '/events',
+        templateUrl: 'components/events/events.html',
         controller: 'EventsCtrl',
         resolve: {
           events: function(Events) {
@@ -71,14 +94,14 @@ angular.module('k8s-manager', [
           }
         }
       })
-      .state('nodes', {
-        url: "/nodes",
+      .state('app.nodes', {
+        url: '/nodes',
         abstract: true,
-        templateUrl: "components/nodes/viewport.html"
+        templateUrl: 'components/nodes/viewport.html'
       })
-      .state('nodes.all', {
-        url: "/all",
-        templateUrl: "components/nodes/nodes.html",
+      .state('app.nodes.all', {
+        url: '/all',
+        templateUrl: 'components/nodes/nodes.html',
         controller: 'NodesCtrl',
         resolve: {
           nodes: function(Nodes) {
@@ -86,9 +109,9 @@ angular.module('k8s-manager', [
           }
         }
       })
-      .state('nodes.detail', {
-        url: "/:name",
-        templateUrl: "components/nodes/node-detail.html",
+      .state('app.nodes.detail', {
+        url: '/:name',
+        templateUrl: 'components/nodes/node-detail.html',
         controller: 'NodeDetailCtrl',
         resolve: {
           containers: function(Nodes, $stateParams) {
@@ -99,9 +122,9 @@ angular.module('k8s-manager', [
           }
         }
       })
-      .state('about', {
-        url: "/about",
-        templateUrl: "components/about/about.html",
+      .state('app.about', {
+        url: '/about',
+        templateUrl: 'components/about/about.html',
         controller: 'AboutCtrl'
       });
 
@@ -122,9 +145,6 @@ angular.module('k8s-manager', [
       setAutoReloadInterval();
     };
     setAutoReloadInterval();
-  }])
-  .controller('AppMenuController', ['$state', '$scope', function($state, $scope) {
-    $scope.state = $state;
   }])
   .filter('bytes', function() {
     return function(bytes, precision) {

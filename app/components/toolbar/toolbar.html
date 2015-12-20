@@ -1,0 +1,34 @@
+<md-toolbar layout="row" class="md-whiteframe-z3">
+  <div class="md-toolbar-tools">
+    <img src="assets/img/logo.png" style="height: 50px; padding: 7px; margin-right: 10px;">
+    <h2>Kubernetes Manager</h2>
+    <span flex></span>
+    <md-button aria-label="Dashboard"
+               ui-sref="app.dashboard({namespace: 'default'})"
+               ng-disabled="state.includes('app.dashboard')">
+      <md-icon md-font-icon="dashboard">dashboard</md-icon>
+      <span>Dashboard</span>
+    </md-button>
+    <md-button aria-label="Events"
+               ui-sref="app.events"
+               ng-disabled="state.includes('app.events')">
+      <md-icon md-font-icon="event">event</md-icon>
+      <span>Events</span>
+    </md-button>
+    <md-button aria-label="Nodes"
+               ui-sref="app.nodes.all"
+               ng-disabled="state.includes('app.nodes')">
+      <md-icon md-font-icon="computer">computer</md-icon>
+      <span>Nodes</span>
+    </md-button>
+    <md-button class="md-icon-button" aria-label="About"
+               ui-sref="app.about"
+               ng-disabled="state.includes('app.about')">
+      <md-icon md-font-icon="infoo">info</md-icon>
+    </md-button>
+  </div>
+</md-toolbar>
+
+<md-content flex layout-padding ui-view>
+
+</md-content>

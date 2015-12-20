@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<!--[if lt IE 7]>      <html lang="en" ng-app="k8s-manager" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="k8s-manager" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="k8s-manager" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="k8s-manager" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -11,100 +11,41 @@
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
-  <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel='stylesheet' href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,400italic'>
+  <link rel="stylesheet" href="bower_components/angular-material/angular-material.css"/>
   <link rel="stylesheet" href="bower_components/nvd3/build/nv.d3.css"/>
   <link rel="stylesheet" href="app.css">
+
+
 
   <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon-96x96.png">
   <link rel="icon" type="image/png" sizes="16x16" href="assets/favicon-16x16.png">
 
+  <style type="text/css">
+    /**
+     * Hide when Angular is not yet loaded and initialized
+     */
+    [ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+      display: none !important;
+    }
+  </style>
+
 </head>
-<body>
+<body ng-app="k8s-manager" ng-cloak layout="column">
 
-<nav class="navbar navbar-inverse navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <!--<span>-->
-        <!--<img src="assets/img/logo.png" />-->
-        <!--<a class="navbar-brand" href="#">k8s Manager</a>-->
-      <!--</span>-->
-
-    </div>
-    <ul class="nav navbar-nav navbar-left">
-      <li><img src="assets/img/logo.png" style="height: 50px; padding: 7px; margin-right: 10px;"/></li>
-      <li><a class="navbar-brand" href="#">Kubernetes Manager</a></li>
-    </ul>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav navbar-right" ng-controller="AppMenuController">
-        <li ng-controller="AutoReloadController"><a href="" ng-click="toggleAutoReload()">
-          <span ng-if="autoReloadActivated"><i class="fa fa-refresh fa-spin"></i> Auto Reload: <strong><span style="color: green">ON</span></strong></span>
-          <span ng-if="!autoReloadActivated"><i class="fa fa-refresh"></i> Auto Reload: OFF</span>
-        </a></li>
-        <li ng-class="{active: state.includes('dashboard')}">
-          <a ui-sref="dashboard({namespace:'default'})">
-            <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Dashboard
-          </a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="events">
-            <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span> Events
-          </a>
-        </li>
-        <li ng-class="{active: state.includes('nodes')}">
-          <a ui-sref="nodes.all">
-            <span class="glyphicon glyphicon-th" aria-hidden="true"></span> Nodes
-          </a>
-        </li>
-        <li ui-sref-active="active">
-          <a ui-sref="about">
-            <span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> About
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
-
-<div class="container-fluid main">
-  <div ui-view>
-
-  </div>
-</div>
-
-<!-- Bootstrap core JavaScript
-================================================== -->
-<!-- Placed at the end of the document so the pages load faster -->
-<script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-<!--<ul class="menu">-->
-<!--<li><a href="#/view1">view1</a></li>-->
-<!--<li><a href="#/view2">view2</a></li>-->
-<!--</ul>-->
+<md-content ui-view flex></md-content>
 
 <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
 <![endif]-->
 
-
-<!-- In production use:
-<script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
--->
-
 <script src="bower_components/angular/angular.js"></script>
 <script src="bower_components/angular-animate/angular-animate.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap.js"></script>
-<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<script src="bower_components/angular-aria/angular-aria.js"></script>
+<script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
 <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
 <script src="bower_components/moment/moment.js"></script>
 <script src="bower_components/angular-moment/angular-moment.js"></script>
@@ -117,10 +58,11 @@
 <script src="components/api/api.js"></script>
 <script src="components/api/util.js"></script>
 
-<script src="components/modals/modals.js"></script>
-<script src="components/modals/pod.modal.js"></script>
-<script src="components/modals/replication-controller.modal.js"></script>
+<script src="components/toolbar/toolbar.js"></script>
 <script src="components/dashboard/dashboard.js"></script>
+<script src="components/dashboard/pods/pods.js"></script>
+<script src="components/dashboard/services/services.js"></script>
+<script src="components/dashboard/replicationcontrollers/replicationcontrollers.js"></script>
 <script src="components/events/events.js"></script>
 
 <script src="components/nodes/_module.js"></script>

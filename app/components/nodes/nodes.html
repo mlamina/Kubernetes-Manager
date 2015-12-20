@@ -1,41 +1,41 @@
-<!--<div class="row" ng-repeat="node in nodes">-->
-  <!--<div class="col-md-3">-->
-    <!--<h2>{{ node.metadata.name }}</h2>-->
+<md-grid-list md-cols="3" md-gutter="1em" md-row-height="4:3" layout="column" flex>
+  <md-grid-tile ng-repeat="node in nodes" class="md-whiteframe-3dp">
+    {{ node.metadata.name }}
+  </md-grid-tile>
+</md-grid-list>
+<!--<div class="col-md-3" ng-repeat="node in nodes">-->
+  <!--<div class="panel panel-default">-->
+    <!--<div class="panel-heading">-->
+      <!--<i class="fa fa-server"></i> <b><a ui-sref="nodes.detail(node.metadata)">{{ node.metadata.name }}</a></b>-->
+    <!--</div>-->
+    <!--<table class="table table-striped table-condensed"  >-->
+      <!--<tr>-->
+        <!--<td><strong>Status</strong></td>-->
+        <!--<td><span ng-class="{'label-success': node.status.conditions[0].type === 'Ready'}" class="label">-->
+              <!--{{ node.status.conditions[0].type }}-->
+            <!--</span></td>-->
+      <!--</tr>-->
+      <!--<tr>-->
+        <!--<td><strong>CPUs</strong></td>-->
+        <!--<td>{{ node.status.capacity.cpu }}</td>-->
+      <!--</tr>-->
+      <!--<tr>-->
+        <!--<td><strong>RAM</strong></td>-->
+        <!--<td>{{ node.status.capacity.memory }}</td>-->
+      <!--</tr>-->
+      <!--<tr>-->
+        <!--<td><strong>Pods</strong></td>-->
+        <!--<td>{{ node.status.capacity.pods }}</td>-->
+      <!--</tr>-->
+      <!--<tr>-->
+        <!--<td><strong>OS</strong></td>-->
+        <!--<td>{{ node.status.nodeInfo.osImage }}</td>-->
+      <!--</tr>-->
+      <!--<tr ng-repeat="ip in node.status.addresses">-->
+        <!--<td><strong>{{ ip.type }}</strong></td>-->
+        <!--<td>{{ ip.address }}</td>-->
+      <!--</tr>-->
+    <!--</table>-->
   <!--</div>-->
-<!--</div>-->
-<div class="col-md-3" ng-repeat="node in nodes">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      <i class="fa fa-server"></i> <b><a ui-sref="nodes.detail(node.metadata)">{{ node.metadata.name }}</a></b>
-    </div>
-    <table class="table table-striped table-condensed"  >
-      <tr>
-        <td><strong>Status</strong></td>
-        <td><span ng-class="{'label-success': node.status.conditions[0].type === 'Ready'}" class="label">
-              {{ node.status.conditions[0].type }}
-            </span></td>
-      </tr>
-      <tr>
-        <td><strong>CPUs</strong></td>
-        <td>{{ node.status.capacity.cpu }}</td>
-      </tr>
-      <tr>
-        <td><strong>RAM</strong></td>
-        <td>{{ node.status.capacity.memory }}</td>
-      </tr>
-      <tr>
-        <td><strong>Pods</strong></td>
-        <td>{{ node.status.capacity.pods }}</td>
-      </tr>
-      <tr>
-        <td><strong>OS</strong></td>
-        <td>{{ node.status.nodeInfo.osImage }}</td>
-      </tr>
-      <tr ng-repeat="ip in node.status.addresses">
-        <td><strong>{{ ip.type }}</strong></td>
-        <td>{{ ip.address }}</td>
-      </tr>
-    </table>
-  </div>
 
-</div>
+<!--</div>-->

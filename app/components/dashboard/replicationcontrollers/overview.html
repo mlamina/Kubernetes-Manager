@@ -1,0 +1,53 @@
+<div>
+  <md-card ng-repeat="rc in rcs">
+    <md-card-title>
+      <md-card-header>
+        <md-card-avatar>
+          <md-icon class="md-avatar-icon" style="background-color: green" md-font-icon="done">done</md-icon>
+        </md-card-avatar>
+        <md-card-header-text>
+          <span class="md-title">
+            <a ui-sref="app.dashboard.replicationcontrollers.details({name:'{{rc.metadata.name}}' })">{{rc.metadata.name}}</a>
+          </span>
+          <span class="md-subhead">{{rc.status.replicas}} / {{rc.spec.replicas}}</span>
+        </md-card-header-text>
+      </md-card-header>
+    </md-card-title>
+    <md-card-content>
+      <md-progress-linear md-mode="determinate" value="{{(rc.status.replicas / rc.spec.replicas) * 100}}"></md-progress-linear>
+    </md-card-content>
+    <md-card-actions layout="row" layout-align="start center">
+      <md-button>Delete</md-button>
+    </md-card-actions>
+  </md-card>
+</div>
+<!--<div class="panel panel-default">-->
+<!--<div class="panel-heading">-->
+<!--<h3 class="panel-title">{{ rcs.length }} Replication Controllers</h3>-->
+<!--</div>-->
+<!--<table class="table table-striped"  >-->
+<!--<thead>-->
+<!--<th>Name</th>-->
+<!--<th>Replications</th>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr ng-repeat="rc in rcs">-->
+<!--<td><a href="" ng-click="openModal(rc)">{{rc.metadata.name}}</a></td>-->
+<!--<td>-->
+<!--<div class="progress" style="margin-bottom: 0 !important;">-->
+<!--<div class="progress-bar"-->
+<!--role="progressbar"-->
+<!--aria-valuenow="60"-->
+<!--aria-valuemin="0"-->
+<!--aria-valuemax="100"-->
+<!--style="width: {{(rc.status.replicas / rc.spec.replicas) * 100}}%; min-width: 3em;"-->
+<!--ng-class="{ 'progress-bar-warning': (rc.status.replicas < rc.spec.replicas && rc.status.replicas > 0), 'progress-bar-danger': (rc.status.replicas == 0), 'progress-bar-success': (rc.status.replicas == rc.spec.replicas) }">-->
+<!--{{rc.status.replicas}} / {{rc.spec.replicas}}-->
+<!--</div>-->
+<!--</div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</tbody>-->
+
+<!--</table>-->
+<!--</div>-->
