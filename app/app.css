@@ -17,11 +17,31 @@ md-list-item.active {
 }
 
 .rc-progress {
-  width: 100px;
-  margin-right: 10px;
+  margin-right: 12px;
 }
 
+.resource-container md-toolbar md-icon{
+  margin-right: 8px;
+}
 .resource-container md-toolbar {
   border-radius: 3px 3px 0 0;
   box-shadow: 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.warning .md-bar.md-bar2 {
+  background-color: #ec0600;
+}
+
+
+.text-grey {
+  color: #80807e;
+}
+.text-red {
+  color: #ec0600;
+}
+.text-green {
+  color: #00b613;
+}
+.text-orange {
+  color: #ff8b00;
 }

@@ -7,11 +7,9 @@
   </md-toolbar>
   <md-content flex>
     <md-list class="md-dense" flex>
-      <md-list-item class="md-2-line" ng-repeat="svc in services">
-        <div class="md-list-item-text" layout="column">
-          <h3>{{svc.metadata.name}}</h3>
-          <p><span ng-if="svc.status.loadBalancer.ingress">{{ svc.status.loadBalancer.ingress[0].ip }}</span></p>
-        </div>
+      <md-list-item ng-repeat="svc in services" layout="row">
+        <span flex="40">{{svc.metadata.name}}</span>
+        <a flex="60" href="http://{{ svc.status.loadBalancer.ingress[0].ip }}">{{ svc.status.loadBalancer.ingress[0].ip }}</a>
       </md-list-item>
     </md-list>
   </md-content>

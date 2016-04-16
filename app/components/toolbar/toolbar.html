@@ -4,7 +4,7 @@
     <h2>Kubernetes Manager</h2>
     <span flex></span>
     <md-button aria-label="Dashboard"
-               ui-sref="app.dashboard({namespace: 'default'})"
+               ui-sref="app.dashboard.namespace({namespace: 'default'})"
                ng-disabled="state.includes('app.dashboard')">
       <md-icon md-font-icon="dashboard">dashboard</md-icon>
       <span>Dashboard</span>
@@ -29,6 +29,6 @@
   </div>
 </md-toolbar>
 
-<md-content flex layout-padding ui-view>
+<md-content flex ui-view>
 
 </md-content>

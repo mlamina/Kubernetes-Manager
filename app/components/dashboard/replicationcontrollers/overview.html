@@ -11,13 +11,14 @@
         <md-tooltip md-direction="right">
           {{rc.status.replicas}}/{{rc.spec.replicas}} replicas
         </md-tooltip>
-        <span class="rc-progress">
+        <span class="rc-progress" flex="30" ng-class="{ warning: rc.status.replicas < rc.spec.replicas }">
           <md-progress-linear
                   md-mode="determinate"
                   value="{{(rc.status.replicas / rc.spec.replicas) * 100}}">
           </md-progress-linear>
         </span>
-        <span flex>{{rc.metadata.name}}</span>
+        <span flex="60">{{rc.metadata.name}}</span>
+        <span flex="10">{{rc.status.replicas}} / {{rc.spec.replicas}}</span>
       </md-list-item>
     </md-list>
   </md-content>

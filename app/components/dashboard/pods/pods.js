@@ -42,16 +42,16 @@ angular.module('k8s-manager.dashboard')
       link: function(scope, element, attrs) {
         var phase = scope.pod.status.phase;
         element.text(phase);
-        element.addClass('label');
+        element.addClass('pod-status');
         if (phase === 'Running') {
           if (scope.pod.containersReady === 0)
-            element.addClass('label-danger')
+            element.addClass('text-green');
           else if (scope.pod.containersReady < scope.pod.status.containerStatuses.length)
-            element.addClass('label-warning');
+            element.addClass('text-orange');
           else
-            element.addClass('label-success');
-        } else if (phase === 'Waiting') element.addClass('label-info');
-        else if (phase === 'Pending') element.addClass('label-info');
+            element.addClass('text-red');
+        } else if (phase === 'Waiting') element.addClass('text-grey');
+        else if (phase === 'Pending') element.addClass('text-grey');
         else element.addClass('label-default');
       }
     };
