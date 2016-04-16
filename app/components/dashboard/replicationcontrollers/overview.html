@@ -1,20 +1,27 @@
-<div>
-  <md-card ng-repeat="rc in rcs" ui-sref="app.dashboard.replicationcontrollers.details({name:'{{rc.metadata.name}}' })">
-    <md-card-title>
-      <md-card-header>
-        <md-card-avatar>
-          <md-icon class="md-avatar-icon" style="background-color: green" md-font-icon="done">done</md-icon>
-        </md-card-avatar>
-        <md-card-header-text>
-          <span class="md-title">{{rc.metadata.name}}</span>
-          <span class="md-subhead">{{rc.status.replicas}} / {{rc.spec.replicas}}</span>
-        </md-card-header-text>
-      </md-card-header>
-    </md-card-title>
-    <md-card-content layout="row">
-      <md-progress-linear md-mode="determinate" value="{{(rc.status.replicas / rc.spec.replicas) * 100}}"></md-progress-linear>
-    </md-card-content>
-  </md-card>
+<div class="md-whiteframe-z1 resource-container" layout="column">
+  <md-toolbar class="md-primary">
+    <div class="md-toolbar-tools">
+      <md-icon md-font-icon="control_point_duplicate">control_point_duplicate</md-icon>
+      <h2 flex> {{ rcs.length }} Replication Controllers</h2>
+    </div>
+  </md-toolbar>
+  <md-content flex>
+    <md-list class="md-dense" flex>
+      <md-list-item ng-repeat="rc in rcs" layout="row">
+        <md-tooltip md-direction="right">
+          {{rc.status.replicas}}/{{rc.spec.replicas}} replicas
+        </md-tooltip>
+        <span class="rc-progress">
+          <md-progress-linear
+                  md-mode="determinate"
+                  value="{{(rc.status.replicas / rc.spec.replicas) * 100}}">
+          </md-progress-linear>
+        </span>
+        <span flex>{{rc.metadata.name}}</span>
+      </md-list-item>
+    </md-list>
+  </md-content>
+
 </div>
 <!--<div class="panel panel-default">-->
 <!--<div class="panel-heading">-->

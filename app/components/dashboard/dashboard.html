@@ -1,29 +1,17 @@
-<div layout="row">
+<div layout="column">
   <md-tabs md-dynamic-height md-border-bottom flex>
     <md-tab label="{{namespace.metadata.name}}"
-            ui-sref="app.dashboard.pods({ namespace: namespace.metadata.name })"
+            ui-sref="app.dashboard.namespace({ namespace: namespace.metadata.name })"
             ng-repeat="namespace in namespaces">
-      <md-content class="md-padding" layout="row">
-        <md-list>
-          <md-list-item ui-sref="app.dashboard.pods" ui-sref-active="active">
-            <md-icon md-font-icon="class">class</md-icon>
-            <p>Pods</p>
-          </md-list-item>
-          <md-list-item ui-sref="app.dashboard.replicationcontrollers" ui-sref-active="active">
-            <md-icon md-font-icon="control_point_duplicate">control_point_duplicate</md-icon>
-            <p>Replication Controllers</p>
-          </md-list-item>
-          <md-list-item ui-sref="app.dashboard.services" ui-sref-active="active">
-            <md-icon md-font-icon="http">http</md-icon>
-            <p>Services</p>
-          </md-list-item>
-        </md-list>
-        <md-content flex layout-padding ui-view>
 
-
-        </md-content>
-      </md-content>
     </md-tab>
   </md-tabs>
+  <md-content layout="column" flex>
+    <div layout="row" layout-padding>
+      <div ui-view="rcs" flex="50"></div>
+      <div ui-view="services" flex="50"></div>
+    </div>
+    <div ui-view="pods" flex layout-padding></div>
+  </md-content>
 
 </div>

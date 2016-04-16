@@ -30,60 +30,58 @@ angular.module('k8s-manager', [
         }
       })
       .state('app.dashboard', {
-        url: '/dashboard/:namespace',
+        url: '/dashboard',
         templateUrl: 'components/dashboard/dashboard.html',
         controller: 'DashboardController'
       })
-      .state('app.dashboard.pods', {
-        url: '/pods',
-        templateUrl: 'components/dashboard/pods/overview.html',
-        controller: 'PodsResourceController',
-        resolve: {
-          pods: function(Pods, $stateParams) {
-            return Pods.byNamespace($stateParams.namespace);
-          }
-        }
-      })
-      .state('app.dashboard.pods.details', {
-        url: '/:name',
-        templateUrl: 'components/dashboard/pods/detail.html',
-        controller: 'PodsDetailController',
-        resolve: {
-          pod: function (Pods, $stateParams) {
-            return Pods.getPod($stateParams.namespace, $stateParams.name);
-          }
-        }
-      })
-      .state('app.dashboard.replicationcontrollers', {
-        url: '/replicationcontrollers',
-        templateUrl: 'components/dashboard/replicationcontrollers/overview.html',
-        controller: 'RcResourceController',
+      .state('app.dashboard.namespace', {
+        url: '/:namespace',
         resolve: {
           replicationControllers: function(ReplicationControllers, $stateParams) {
             return ReplicationControllers.byNamespace($stateParams.namespace);
-          }
-        }
-      })
-      .state('app.dashboard.replicationcontrollers.details', {
-        url: '/:name',
-        templateUrl: 'components/dashboard/replicationcontrollers/detail.html',
-        controller: 'RcDetailController',
-        resolve: {
-          replicationController: function($stateParams) {
-            return ReplicationControllers.getRc($stateParams.namespace, $stateParams.name);
-          }
-        }
-      })
-      .state('app.dashboard.services', {
-        url: '/services',
-        templateUrl: 'components/dashboard/services/overview.html',
-        controller: 'ServiceResourceController',
-        resolve: {
+          },
           services: function(Services, $stateParams) {
             return Services.byNamespace($stateParams.namespace);
+          },
+          pods: function(Pods, $stateParams) {
+            return Pods.byNamespace($stateParams.namespace);
+          }
+        },
+        views: {
+          pods: {
+            templateUrl: 'components/dashboard/pods/overview.html',
+            controller: 'PodsResourceController'
+          },
+          rcs: {
+            templateUrl: 'components/dashboard/replicationcontrollers/overview.html',
+            controller: 'RcResourceController'
+          },
+          services: {
+            templateUrl: 'components/dashboard/services/overview.html',
+            controller: 'ServiceResourceController'
           }
         }
       })
+      //.state('app.dashboard.pods.details', {
+      //  url: '/:name',
+      //  templateUrl: 'components/dashboard/pods/detail.html',
+      //  controller: 'PodsDetailController',
+      //  resolve: {
+      //    pod: function (Pods, $stateParams) {
+      //      return Pods.getPod($stateParams.namespace, $stateParams.name);
+      //    }
+      //  }
+      //})
+      //.state('app.dashboard.replicationcontrollers.details', {
+      //  url: '/:name',
+      //  templateUrl: 'components/dashboard/replicationcontrollers/detail.html',
+      //  controller: 'RcDetailController',
+      //  resolve: {
+      //    replicationController: function($stateParams) {
+      //      return ReplicationControllers.getRc($stateParams.namespace, $stateParams.name);
+      //    }
+      //  }
+      //})
       .state('app.events', {
         url: '/events',
         templateUrl: 'components/events/events.html',

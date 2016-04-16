@@ -6,3 +6,22 @@
 md-list-item.active {
   background-color: #ECEFF1;
 }
+
+.resource-container {
+  padding: 0;
+  border-radius: 3px;
+  z-index: 1;
+}
+.resource-container md-content {
+  border-radius: 3px;
+}
+
+.rc-progress {
+  width: 100px;
+  margin-right: 10px;
+}
+
+.resource-container md-toolbar {
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 1px rgba(255, 255, 255, 0.1);
+}

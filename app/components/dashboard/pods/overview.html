@@ -1,19 +1,19 @@
-<div>
-  <md-card ng-repeat="pod in pods | orderBy:podOrder:true">
-    <md-card-title>
-      <md-card-header>
-        <md-card-avatar>
-          <md-icon class="md-avatar-icon" style="background-color: green" md-font-icon="done">done</md-icon>
-        </md-card-avatar>
-        <md-card-header-text>
-          <span class="md-title">{{pod.metadata.name}}</span>
-          <span class="md-subhead"><span pod-status></span></span>
-        </md-card-header-text>
-      </md-card-header>
-    </md-card-title>
-    <md-card-content>
-      <!--<md-chips readonly="true" ng-model="pod.metadata.labels"></md-chips>-->
-    </md-card-content>
+<div class="md-whiteframe-z1 resource-container" layout="column">
+  <md-toolbar class="md-primary">
+    <div class="md-toolbar-tools">
+      <md-icon md-font-icon="class">class</md-icon>
+      <h2 flex>{{ pods.length }} Pods</h2>
+    </div>
+  </md-toolbar>
+  <md-content flex>
+    <md-list class="md-dense" flex>
+      <md-list-item class="md-2-line" ng-repeat="pod in pods | orderBy:podOrder:true">
+        <div class="md-list-item-text">
+          <h3>{{pod.metadata.name}}</h3>
+          <p><span pod-status></span></p>
+        </div>
+      </md-list-item>
+    </md-list>
+  </md-content>
 
-  </md-card>
 </div>
