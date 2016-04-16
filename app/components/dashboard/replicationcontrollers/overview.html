@@ -1,24 +1,19 @@
 <div>
-  <md-card ng-repeat="rc in rcs">
+  <md-card ng-repeat="rc in rcs" ui-sref="app.dashboard.replicationcontrollers.details({name:'{{rc.metadata.name}}' })">
     <md-card-title>
       <md-card-header>
         <md-card-avatar>
           <md-icon class="md-avatar-icon" style="background-color: green" md-font-icon="done">done</md-icon>
         </md-card-avatar>
         <md-card-header-text>
-          <span class="md-title">
-            <a ui-sref="app.dashboard.replicationcontrollers.details({name:'{{rc.metadata.name}}' })">{{rc.metadata.name}}</a>
-          </span>
+          <span class="md-title">{{rc.metadata.name}}</span>
           <span class="md-subhead">{{rc.status.replicas}} / {{rc.spec.replicas}}</span>
         </md-card-header-text>
       </md-card-header>
     </md-card-title>
-    <md-card-content>
+    <md-card-content layout="row">
       <md-progress-linear md-mode="determinate" value="{{(rc.status.replicas / rc.spec.replicas) * 100}}"></md-progress-linear>
     </md-card-content>
-    <md-card-actions layout="row" layout-align="start center">
-      <md-button>Delete</md-button>
-    </md-card-actions>
   </md-card>
 </div>
 <!--<div class="panel panel-default">-->

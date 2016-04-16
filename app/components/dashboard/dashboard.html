@@ -1,37 +1,29 @@
-<div layout="row" style="height: 90vh">
-  <md-sidenav class="md-sidenav-left md-whiteframe-z2"
-              md-component-id="left"
-              md-is-locked-open="true" flex>
-    <md-content role="navigation">
-      <md-list>
-        <md-list-item>
-          <md-input-container class="md-block" flex-gt-sm>
-            <label>Namespace</label>
-            <md-select ng-model="currentNamespace"
-                       placeholder="Namespace"
-                       md-on-close="namespaceSelected()">
-              <md-option ng-repeat="namespace in namespaces"
-                         value="{{namespace.metadata.name}}">{{namespace.metadata.name}}</md-option>
-            </md-select>
-          </md-input-container>
+<div layout="row">
+  <md-tabs md-dynamic-height md-border-bottom flex>
+    <md-tab label="{{namespace.metadata.name}}"
+            ui-sref="app.dashboard.pods({ namespace: namespace.metadata.name })"
+            ng-repeat="namespace in namespaces">
+      <md-content class="md-padding" layout="row">
+        <md-list>
+          <md-list-item ui-sref="app.dashboard.pods" ui-sref-active="active">
+            <md-icon md-font-icon="class">class</md-icon>
+            <p>Pods</p>
+          </md-list-item>
+          <md-list-item ui-sref="app.dashboard.replicationcontrollers" ui-sref-active="active">
+            <md-icon md-font-icon="control_point_duplicate">control_point_duplicate</md-icon>
+            <p>Replication Controllers</p>
+          </md-list-item>
+          <md-list-item ui-sref="app.dashboard.services" ui-sref-active="active">
+            <md-icon md-font-icon="http">http</md-icon>
+            <p>Services</p>
+          </md-list-item>
+        </md-list>
+        <md-content flex layout-padding ui-view>
 
-        </md-list-item>
-        <md-list-item ui-sref="app.dashboard.pods" ui-sref-active="active">
-          <md-icon md-font-icon="class">class</md-icon>
-          <p>Pods</p>
-        </md-list-item>
-        <md-list-item ui-sref="app.dashboard.replicationcontrollers" ui-sref-active="active">
-          <md-icon md-font-icon="control_point_duplicate">control_point_duplicate</md-icon>
-          <p>Replication Controllers</p>
-        </md-list-item>
-        <md-list-item ui-sref="app.dashboard.services" ui-sref-active="active">
-          <md-icon md-font-icon="http">http</md-icon>
-          <p>Services</p>
-        </md-list-item>
-      </md-list>
-    </md-content>
-  </md-sidenav>
-  <md-content flex layout-padding ui-view>
 
-  </md-content>
+        </md-content>
+      </md-content>
+    </md-tab>
+  </md-tabs>
+
 </div>
