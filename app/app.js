@@ -16,7 +16,10 @@ angular.module('k8s-manager', [
     'k8s-manager.constants',
     'k8s-manager.about'
   ])
-  .config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+  .config(['$stateProvider', '$urlRouterProvider', '$mdThemingProvider', function($stateProvider, $urlRouterProvider, $mdThemingProvider) {
+    $mdThemingProvider.theme('default')
+      .primaryPalette('blue-grey')
+      .accentPalette('orange');
     $urlRouterProvider.otherwise('/dashboard/default');
     $stateProvider
       .state('app', {
