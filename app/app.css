@@ -7,13 +7,26 @@ md-list-item.active {
   background-color: #ECEFF1;
 }
 
+#main {
+  background-color: rgb(245, 245, 245);
+}
+
+#dashboard {
+  background-color: rgb(245, 245, 245);
+}
+
+.z-index-2 {
+  z-index: 2;
+}
+
 .resource-container {
   padding: 0;
-  border-radius: 3px;
+  border-radius: 2px;
   z-index: 1;
+  background-color: #ffffff;
 }
 .resource-container md-content {
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 .rc-progress {
@@ -23,9 +36,8 @@ md-list-item.active {
 .resource-container md-toolbar md-icon{
   margin-right: 8px;
 }
-.resource-container md-toolbar {
-  border-radius: 3px 3px 0 0;
-  box-shadow: 0 1px rgba(255, 255, 255, 0.1);
+.resource-container md-list md-list-item {
+  min-height: 32px;
 }
 
 .warning .md-bar.md-bar2 {

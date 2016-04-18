@@ -1,14 +1,14 @@
-<div layout="column">
-  <md-tabs md-dynamic-height md-border-bottom flex>
+<div layout="column" flex>
+  <md-tabs md-dynamic-height md-border-bottom class="md-whiteframe-z2 z-index-2">
     <md-tab label="{{namespace.metadata.name}}"
             ui-sref="app.dashboard.namespace({ namespace: namespace.metadata.name })"
             ng-repeat="namespace in namespaces">
 
     </md-tab>
   </md-tabs>
-  <md-content layout="column" layout-padding flex>
-    <div layout="row" layout-padding>
-      <div ui-view="rcs" flex="50"></div>
+  <md-content layout="column" layout-padding flex id="dashboard">
+    <div layout="row">
+      <div ui-view="rcs" flex="50" style="margin-right: 16px;"></div>
       <div ui-view="services" flex="50"></div>
     </div>
     <div ui-view="pods" flex layout-padding></div>

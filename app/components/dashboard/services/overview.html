@@ -1,17 +1,13 @@
-<div class="md-whiteframe-z1 resource-container" layout="column">
-  <md-toolbar class="md-primary">
-    <div class="md-toolbar-tools">
-      <md-icon md-font-icon="class">class</md-icon>
-      <h2 flex>{{ services.length }} Services</h2>
-    </div>
-  </md-toolbar>
-  <md-content flex>
-    <md-list class="md-dense" flex>
-      <md-list-item ng-repeat="svc in services" layout="row">
-        <span flex="40">{{svc.metadata.name}}</span>
-        <a flex="60" href="http://{{ svc.status.loadBalancer.ingress[0].ip }}">{{ svc.status.loadBalancer.ingress[0].ip }}</a>
-      </md-list-item>
-    </md-list>
-  </md-content>
-
+<div class="resource-container md-whiteframe-z1" layout="column">
+  <div layout="row" layout-padding>
+    <md-icon md-font-icon="class">class</md-icon>
+    <span class="md-title" flex>Services</span>
+  </div>
+  <md-divider></md-divider>
+  <md-list class="md-dense" flex>
+    <md-list-item ng-repeat="svc in services" layout="row">
+      <span flex="40">{{svc.metadata.name}}</span>
+      <a flex="60" href="http://{{ svc.status.loadBalancer.ingress[0].ip }}">{{ svc.status.loadBalancer.ingress[0].ip }}</a>
+    </md-list-item>
+  </md-list>
 </div>

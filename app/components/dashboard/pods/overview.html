@@ -1,19 +1,15 @@
-<div class="md-whiteframe-z1 resource-container" layout="column">
-  <md-toolbar class="md-primary">
-    <div class="md-toolbar-tools">
-      <md-icon md-font-icon="class">class</md-icon>
-      <h2 flex>{{ pods.length }} Pods</h2>
-    </div>
-  </md-toolbar>
-  <md-content flex>
-    <md-list class="md-dense" flex>
-      <md-list-item class="md-2-line" ng-repeat="pod in pods | orderBy:podOrder:true">
-        <div class="md-list-item-text">
-          <h3>{{pod.metadata.name}}</h3>
-          <p><span pod-status></span></p>
-        </div>
-      </md-list-item>
-    </md-list>
-  </md-content>
-
+<div class="resource-container md-whiteframe-z1" layout="column">
+  <div layout="row" layout-padding>
+    <md-icon md-font-icon="class">class</md-icon>
+    <span class="md-title" flex>Pods</span>
+  </div>
+  <md-divider></md-divider>
+  <md-list class="md-dense" flex>
+    <md-list-item class="md-2-line" ng-repeat="pod in pods | orderBy:podOrder:true">
+      <div class="md-list-item-text">
+        <h3>{{pod.metadata.name}}</h3>
+        <p><span pod-status></span></p>
+      </div>
+    </md-list-item>
+  </md-list>
 </div>

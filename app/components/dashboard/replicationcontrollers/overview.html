@@ -1,28 +1,25 @@
-<div class="md-whiteframe-z1 resource-container" layout="column">
-  <md-toolbar class="md-primary">
-    <div class="md-toolbar-tools">
-      <md-icon md-font-icon="control_point_duplicate">control_point_duplicate</md-icon>
-      <h2 flex> {{ rcs.length }} Replication Controllers</h2>
-    </div>
-  </md-toolbar>
-  <md-content flex>
-    <md-list class="md-dense" flex>
-      <md-list-item ng-repeat="rc in rcs" layout="row">
-        <md-tooltip md-direction="right">
-          {{rc.status.replicas}}/{{rc.spec.replicas}} replicas
-        </md-tooltip>
-        <span class="rc-progress" flex="30" ng-class="{ warning: rc.status.replicas < rc.spec.replicas }">
+<div class="resource-container md-whiteframe-z1" layout="column">
+  <div layout="row" layout-padding>
+    <md-icon md-font-icon="control_point_duplicate">control_point_duplicate</md-icon>
+    <span class="md-title" flex>Replication Controllers</span>
+  </div>
+  <md-divider></md-divider>
+  <md-list class="md-dense" flex>
+    <md-list-item ng-repeat="rc in rcs" layout="row">
+      <md-tooltip md-direction="right">
+        {{rc.status.replicas}}/{{rc.spec.replicas}} replicas
+      </md-tooltip>
+        <span class="rc-progress" flex="30">
           <md-progress-linear
+                  ng-class="{ 'md-warn': rc.status.replicas < rc.spec.replicas }"
                   md-mode="determinate"
                   value="{{(rc.status.replicas / rc.spec.replicas) * 100}}">
           </md-progress-linear>
         </span>
-        <span flex="60">{{rc.metadata.name}}</span>
-        <span flex="10">{{rc.status.replicas}} / {{rc.spec.replicas}}</span>
-      </md-list-item>
-    </md-list>
-  </md-content>
-
+      <span flex="60">{{rc.metadata.name}}</span>
+      <span flex="10" class="md-hue-3">{{rc.status.replicas}} / {{rc.spec.replicas}}</span>
+    </md-list-item>
+  </md-list>
 </div>
 <!--<div class="panel panel-default">-->
 <!--<div class="panel-heading">-->
