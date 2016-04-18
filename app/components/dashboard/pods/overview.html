@@ -3,6 +3,12 @@
     <md-icon md-font-icon="class">class</md-icon>
     <span class="md-title" flex>Pods</span>
   </div>
+  <div layout="row" class="dashboard-header">
+    <span style="width: 24px"></span>
+    <span flex="10">Status</span>
+    <span flex="10">Created</span>
+    <span flex="25">Name</span>
+  </div>
   <md-divider></md-divider>
   <md-list class="md-dense" flex>
     <md-list-item layout="row" ng-repeat="pod in pods | orderBy:podOrder:true" ng-click="openModal(pod)">

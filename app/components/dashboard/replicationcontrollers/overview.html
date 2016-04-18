@@ -3,6 +3,11 @@
     <md-icon md-font-icon="control_point_duplicate">control_point_duplicate</md-icon>
     <span class="md-title" flex>Replication Controllers</span>
   </div>
+  <div layout="row" class="dashboard-header">
+    <span style="width: 40px;"></span>
+    <span flex="20">Replicas</span>
+    <span style="margin-left: 12px;" flex>Name</span>
+  </div>
   <md-divider></md-divider>
   <md-list class="md-dense" flex>
     <md-list-item ng-repeat="rc in rcs" layout="row" ng-click="openModal(pod)">

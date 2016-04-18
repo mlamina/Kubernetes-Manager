@@ -3,6 +3,11 @@
     <md-icon md-font-icon="class">class</md-icon>
     <span class="md-title" flex>Services</span>
   </div>
+  <div layout="row" class="dashboard-header">
+    <span flex="40">Name</span>
+    <span flex="25">External IP</span>
+    <span flex>Ports</span>
+  </div>
   <md-divider></md-divider>
   <md-list class="md-dense" flex>
     <md-list-item ng-repeat="svc in services" layout="row" ng-click="openModal(pod)">
