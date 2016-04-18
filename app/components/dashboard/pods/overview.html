@@ -5,9 +5,22 @@
   </div>
   <md-divider></md-divider>
   <md-list class="md-dense" flex>
-    <md-list-item layout="row" ng-repeat="pod in pods | orderBy:podOrder:true">
-      <span flex="10" pod-status></span>
-      <a flex="90" href="" ng-click="openModal(pod)">{{pod.metadata.name}}</a>
+    <md-list-item layout="row" ng-repeat="pod in pods | orderBy:podOrder:true" ng-click="openModal(pod)">
+      <span style="width: 24px">
+        <md-progress-circular
+                md-diameter="20px"
+                ng-class="{'md-warn': pod.containersReady < pod.status.containerStatuses.length}"
+                ng-if="pod.status.phase !== 'Running' || pod.containersReady < pod.status.containerStatuses.length"></md-progress-circular>
+      </span>
+      <span flex="10" pod-status class="md-accent"></span>
+
+      <span flex="10" am-time-ago="pod.metadata.creationTimestamp"></span>
+      <span flex="25">{{pod.metadata.name}}</span>
+      <!--<md-chips flex="50">-->
+        <!--<md-chip ng-repeat="(key,value) in pod.metadata.labels">{{value}}</md-chip>-->
+      <!--</md-chips>-->
+      <!--<span ng-repeat="(key,value) in pod.metadata.labels" class="label label-primary" style="margin-right: 2px">{{value}}</span>-->
+      <!--<span ng-repeat="container in pod.spec.containers"><span class="label label-default" style="margin-right: 2px">{{container.name}}</span></span>-->
     </md-list-item>
   </md-list>
 </div>

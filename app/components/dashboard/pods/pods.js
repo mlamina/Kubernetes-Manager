@@ -45,11 +45,11 @@ angular.module('k8s-manager.dashboard')
         element.addClass('pod-status');
         if (phase === 'Running') {
           if (scope.pod.containersReady === 0)
-            element.addClass('text-green');
+            element.addClass('text-red');
           else if (scope.pod.containersReady < scope.pod.status.containerStatuses.length)
             element.addClass('text-orange');
           else
-            element.addClass('text-red');
+            element.addClass('text-green');
         } else if (phase === 'Waiting') element.addClass('text-grey');
         else if (phase === 'Pending') element.addClass('text-grey');
         else element.addClass('label-default');

@@ -5,7 +5,7 @@
   </div>
   <md-divider></md-divider>
   <md-list class="md-dense" flex>
-    <md-list-item ng-repeat="svc in services" layout="row">
+    <md-list-item ng-repeat="svc in services" layout="row" ng-click="openModal(pod)">
       <span flex="40">{{svc.metadata.name}}</span>
       <a flex="60" href="http://{{ svc.status.loadBalancer.ingress[0].ip }}">{{ svc.status.loadBalancer.ingress[0].ip }}</a>
     </md-list-item>
