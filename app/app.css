@@ -11,6 +11,10 @@ md-list-item.active {
   background-color: rgb(245, 245, 245);
 }
 
+#namespaces md-tabs-wrapper {
+  border-width: 0;
+}
+
 #dashboard {
   background-color: rgb(245, 245, 245);
 }

@@ -1,5 +1,5 @@
 <div layout="column" flex>
-  <md-tabs md-dynamic-height md-border-bottom class="md-whiteframe-z2 z-index-2">
+  <md-tabs md-dynamic-height md-border-bottom class="md-whiteframe-z1 z-index-2" id="namespaces">
     <md-tab label="{{namespace.metadata.name}}"
             ui-sref="app.dashboard.namespace({ namespace: namespace.metadata.name })"
             ng-repeat="namespace in namespaces">
