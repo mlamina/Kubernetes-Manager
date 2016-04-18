@@ -17,7 +17,7 @@
     "d3": "~3.5.6",
     "nvd3": "~1.8.1",
     "angularjs-nvd3-directives": "~0.0.7",
-    "angular-material": "^1.0.1"
+    "angular-material": "^1.0.7"
   },
   "devDependencies": {
     "components-font-awesome": "~4.4.0"

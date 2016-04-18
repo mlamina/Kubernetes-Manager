@@ -6,15 +6,18 @@
   <md-divider></md-divider>
   <md-list class="md-dense" flex>
     <md-list-item ng-repeat="rc in rcs" layout="row" ng-click="openModal(pod)">
-      <span flex="10" class="md-caption">{{rc.status.replicas}} / {{rc.spec.replicas}}</span>
-      <span class="rc-progress" flex="30">
+      <span style="width: 32px; text-align: right; padding-right: 8px;" class="md-caption">
+        <span ng-if="rc.status.replicas<rc.spec.replicas">{{rc.status.replicas}} / {{rc.spec.replicas}}</span>
+        <span ng-if="rc.status.replicas===rc.spec.replicas">{{rc.status.replicas}}</span>
+      </span>
+      <span class="rc-progress" flex="20">
         <md-progress-linear
                 ng-class="{ 'md-warn': rc.status.replicas < rc.spec.replicas }"
                 md-mode="determinate"
                 value="{{(rc.status.replicas / rc.spec.replicas) * 100}}">
         </md-progress-linear>
       </span>
-      <span flex="60">{{rc.metadata.name}}</span>
+      <span flex>{{rc.metadata.name}}</span>
 
     </md-list-item>
   </md-list>

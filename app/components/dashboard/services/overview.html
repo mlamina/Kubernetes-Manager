@@ -7,7 +7,13 @@
   <md-list class="md-dense" flex>
     <md-list-item ng-repeat="svc in services" layout="row" ng-click="openModal(pod)">
       <span flex="40">{{svc.metadata.name}}</span>
-      <a flex="60" href="http://{{ svc.status.loadBalancer.ingress[0].ip }}">{{ svc.status.loadBalancer.ingress[0].ip }}</a>
+      <span flex="25" class="md-body-2">{{ svc.status.loadBalancer.ingress[0].ip }}</span>
+
+      <md-chips ng-model="svc.spec.ports" readonly="true" flex>
+        <md-chip-template>
+          {{$chip.protocol}}/{{$chip.port}}
+        </md-chip-template>
+      </md-chips>
     </md-list-item>
   </md-list>
 </div>
