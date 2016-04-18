@@ -5,11 +5,9 @@
   </div>
   <md-divider></md-divider>
   <md-list class="md-dense" flex>
-    <md-list-item class="md-2-line" ng-repeat="pod in pods | orderBy:podOrder:true">
-      <div class="md-list-item-text">
-        <h3>{{pod.metadata.name}}</h3>
-        <p><span pod-status></span></p>
-      </div>
+    <md-list-item layout="row" ng-repeat="pod in pods | orderBy:podOrder:true">
+      <span flex="10" pod-status></span>
+      <a flex="90" href="" ng-click="openModal(pod)">{{pod.metadata.name}}</a>
     </md-list-item>
   </md-list>
 </div>
