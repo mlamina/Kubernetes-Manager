@@ -23,9 +23,9 @@ angular.module('k8s-manager.nodes')
         var type = 'success';
         if (percentage < 25) {
           type = 'success';
-        } else if (value < 50) {
+        } else if (percentage < 50) {
           type = 'info';
-        } else if (value < 75) {
+        } else if (percentage < 75) {
           type = 'warning';
         } else {
           type = 'danger';
