@@ -1,5 +1,5 @@
 DISCLAMER: This project is just a weekend project and does not claim to be well tested or production-ready
-in any way.
+in any way. Since I started this project, the [official Kubernetes dashboard project](https://github.com/kubernetes/dashboard) has gotten a lot of traction. The people working on this have done some great work, check it out!
 
 # Kubernetes Manager
 
